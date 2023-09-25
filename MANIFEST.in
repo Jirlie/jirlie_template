@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include jirlie_template *.css
+recursive-include jirlie_template *.csv
+recursive-include jirlie_template *.html
+recursive-include jirlie_template *.ico
+recursive-include jirlie_template *.js
+recursive-include jirlie_template *.json
+recursive-include jirlie_template *.md
+recursive-include jirlie_template *.png
+recursive-include jirlie_template *.py
+recursive-include jirlie_template *.svg
+recursive-include jirlie_template *.txt
+recursive-exclude jirlie_template *.pyc
