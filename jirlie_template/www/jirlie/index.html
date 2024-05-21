@@ -1,0 +1,207 @@
+{% extends "templates/jirlie_web.html" %} {% block title %} Jirlie Cloud |
+Bringing all the services a business could need to always be one step ahead of
+the game {% endblock %} {% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+<!-- Start Landing -->
+<div class="landing position-relative">
+  <img
+    class="mw-100 mh-100"
+    src="/assets/jirlie_template/images/mu.png"
+    alt=""
+  />
+  <div class="container">
+    <div class="content d-flex flex-column gap-5" style="margin-top: 10%">
+      <h1 class="text-white" style="font-size: 30px; font-weight: bold">
+        Bringing all the services a business could need to always be one step
+        ahead of the game
+      </h1>
+      <div class="buttons" style="margin-top: 3%">
+        <a class="btn main-btn sub" style="width: 174.56px" href="/subscribe"
+          >Start</a
+        >
+        <a
+          class="btn main-btn"
+          style="width: 174.56px"
+          href="https://demo.jirlie.com"
+          >Try Demo</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Landing -->
+<!-- Start News -->
+<div
+  class="news mt-1 position-relative"
+  data-aos="fade-down"
+  data-aos-easing="linear"
+  data-aos-duration="1000"
+>
+  <div class="container">
+    <div class="row">
+      {% for post in blogs %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="box m-auto rounded overflow-hidden position-relative">
+          <div class="pic w-100">
+            <a href="/{{ post.route }}">
+              <img
+                class="mw-100"
+                src="{{ post.cover_image }}"
+                alt="{{ post.title }} - Cover Image"
+              />
+            </a>
+          </div>
+          <div
+            class="post-name d-flex justify-content-between align-items-center p-2 pb-2 border-bottom mb-3"
+          >
+            <div class="info d-flex gap-2">
+              <img
+                class="rounded-circle position-absolute"
+                style="object-fit: cover"
+                src="{{ post.avatar }}"
+                alt=""
+              />
+              <div class="name d-flex flex-column pt-4 ps-2">
+                <a href="/blog?blogger={{ post.blogger }}">
+                  <span>{{ post.full_name }}</span>
+                </a>
+                <div class="spans d-flex align-items-center gap-2">
+                  <span>{{ frappe.format_date(post.published_on) }}</span>
+                  <span>{{ post.read_time }} min read</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="/news/{{ post.category.name }}" class="text-primary ps-3"
+            ><span>{{ post.category.title }}</span></a
+          >
+          <a
+            href="/{{ post.route }}"
+            class="desc d-flex flex-column gap-2 ps-3 pe-2 mt-2"
+            style="height: 300px"
+          >
+            <div class="text-muted small text-uppercase">
+              {%- if post.featured -%}
+              <span class="text-body">{{ _('Featured') }} &middot; </span>
+              {%- endif -%}
+            </div>
+            <h5 class="m-0">{{ post.title }}</h5>
+            <p class="mb-4">{{ post.intro }}</p>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <a
+      style="width: fit-content"
+      class="btn main-btn m-auto d-block article mt-4"
+      href="/news"
+      >Read All News Articles</a
+    >
+  </div>
+</div>
+<!-- End News -->
+<!-- Start Icons -->
+<div class="icons pt-5 pb-5 text-white mb-5 overflow-hidden">
+  <div class="container">
+    <div
+      class="all-icons d-flex justify-content-around flex-column text-black gap-3"
+      data-aos="zoom-out-down"
+    >
+      <div class="icons-1 d-flex align-items-center justify-content-around">
+        <div
+          class="icon d-flex align-items-center gap-4 mb-3 flex-column rounded"
+        >
+          <div class="picture">
+            <img class="mw-100" src="../img/Picture 1.png" alt="" />
+          </div>
+          <p class="fs-4">One Dashboard For All</p>
+        </div>
+        <div class="icon d-flex align-items-center gap-4 mb-3 flex-column">
+          <div class="picture">
+            <img src="../img/Picture 3.png" alt="" />
+          </div>
+          <p class="fs-4">Access On The Go</p>
+        </div>
+        <div class="mb-icon d-flex align-items-center gap-4 mb-3 flex-column">
+          <div class="picture">
+            <img src="../img/Picture 5.png" alt="" />
+          </div>
+          <p class="fs-4">Collaboration</p>
+        </div>
+      </div>
+      <div
+        class="icons-1 d-flex d-flex align-items-center justify-content-around"
+      >
+        <div class="icon d-flex align-items-center gap-4 mb-3 flex-column">
+          <div class="picture">
+            <img class="" src="../img/Picture 2.png" alt="" />
+          </div>
+          <p class="fs-4">Unified Communication</p>
+        </div>
+        <div class="icon d-flex align-items-center gap-4 mb-3 flex-column">
+          <div class="picture">
+            <img src="../img/Picture 4.png" alt="" />
+          </div>
+          <p class="fs-4">Jirlie, The Virtual Assistant</p>
+        </div>
+        <div class="d-flex align-items-center gap-4 m-icon flex-column">
+          <div class="picture">
+            <img class="" src="../img/Picture 6.png" alt="" />
+          </div>
+          <p style="padding-bottom: 1rem" class="fs-4">Data Analytics</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Icons -->
+<!-- End Icons -->
+<!-- Start Stats -->
+<div class="stats mb-5" data-aos="zoom-in-up">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="box text-center">
+          <div class="tite position-relative">
+            <h1 class="fw-bold">29 <span>+</span></h1>
+          </div>
+          <p class="fw-normal">Data Center Locations</p>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="box text-center">
+          <div class="tite position-relative">
+            <h1
+              class="fw-bold d-flex align-items-center justify-content-center"
+            >
+              99.9<span>%</span>
+            </h1>
+          </div>
+          <p class="fw-normal">Uptime Servers</p>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="box text-center">
+          <div class="tite position-relative">
+            <h1 class="fw-bold">80 <span>TB</span></h1>
+          </div>
+          <p class="fw-normal">Data Storage</p>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="box text-center">
+          <div class="tite position-relative">
+            <h1 class="fw-bold">118 <span>+</span></h1>
+          </div>
+          <p class="fw-normal">Countries World Wide</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Stats -->
+
+{% endblock %}

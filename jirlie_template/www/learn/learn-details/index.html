@@ -1,0 +1,45 @@
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Jirlie | Home
+{% endblock %}
+{% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+
+<!-- Start Learn -->
+<div class="learn">
+    <div class="page d-flex">
+      <header class="header">
+        <div class="header_in">
+          <button style="z-index: 999;" type="button" class="btn-side toggle position-fixed" id="toggle">
+            <span></span>
+           </button>
+       </div>
+       <div class="sidebar" id='sidebar'>
+         <ul class="p-0 pt-4 d-flex flex-column gap-1">
+           <h5 class="ps-3"><a style="color: #2196F3;" href="#">Learn</a></h5>
+           {% for learn2_cat in learn2_cat %}
+          <li><a class="" href="/learn/learn-details/{{learn2_cat.route}}">{{learn2_cat.title}}</a></li>
+          {% endfor %}
+        </ul>
+
+       </div>
+     </header>
+        <div class="content">
+          <div class="container">
+            <h2>{{ learn.title}}</h2>
+            <div class="cont-1">
+              <p>&nbsp;</p>
+              {{ learn.content }}
+              <p>&nbsp;</p>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- End Learn -->
+
+
+
+{% endblock %}

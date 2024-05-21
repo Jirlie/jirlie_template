@@ -1,0 +1,261 @@
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Jirlie | {{ blog2.title }}
+{% endblock %}
+{% block content %}
+
+<!-- Start Start -->
+<div class="blog mt-5">
+    <div class="container">
+      <div class="menu">
+        <ul class="d-flex gap-2 p-0">
+          <li><a href="/news/">News / </a></li>
+          <li>
+            <a href="/news/{{blog2.blog_category}}">{{blog_category2.title}}</a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="content d-flex flex-column gap-4"
+      >
+        <div class="descraption d-flex flex-column gap-3">
+          <div class="desk d-flex justify-content-center flex-column gap-2">
+            <h3>{{ blog2.title }}</h3>
+            <p class="fs-5">
+              {{ blog2.blog_intro }}
+            </p>
+            <span class="border-bottom pb-5"
+              >{{ frappe.format_date(blog2.published_on) }} . {{ blog2.read_time }} min</span
+            >
+          </div>
+          <!-- <img
+            class="mw-100 m-auto d-block"
+            style="
+              width: 740px;
+              height: auto;
+              object-fit: cover;
+              object-position: 50% 50%;
+              max-width: 100%;
+            "
+            src="../img/blog-1.jpeg"
+            alt=""
+          /> -->
+          <p>
+            {{ blog2.content }}
+          </p>
+        </div>
+        <div
+        class="post-name d-flex justify-content-between align-items-center"
+      >
+        <div class="info d-flex gap-2">
+          <img
+            style="width: 64px; height: 64px"
+            src="{{ blog2.blogger_photo }}"
+            alt=""
+          />
+          <div class="name d-flex gap-2 flex-column">
+            <span class="fs-5">{{ blog2.blogger }}</span>
+            <p class="">
+              {{ blogger2.bio }}
+            </p>
+          </div>
+        </div>
+      </div>
+        <div class="links d-flex justify-content-between border-bottom pb-1 flex-column flex-lg-row flex-md-row">
+          <div class="reacts d-flex">
+			{% if disable_likes %}
+            <div class="react d-flex gap-3 fs-5">
+              <div class="re">
+                <i class="fa-regular fa-heart"></i>
+                <span>0</span>
+              </div>
+              <div class="re">
+                <i class="fa-regular fa-comment"></i>
+                <span>0</span>
+              </div>
+            </div>
+			{% endif %}
+          </div>
+          <div class="social">
+            <ul class="d-flex gap-3 fs-5">
+              <li>
+                <a class="text-secondary" href="https://twitter.com/intent/tweet?text={{blog2.title}}&url={{frappe.utils.get_url()}}/{{blog2.route}}" target="_blank"
+                  ><i class="fa-brands fa-twitter"></i
+                ></a>
+              </li>
+              <li>
+                <a class="text-secondary" href="https://www.facebook.com/sharer.php?u={{frappe.utils.get_url()}}/{{blog2.route}}" target="_blank"
+                  ><i class="fa-brands fa-facebook"></i
+                ></a>
+              </li>
+              <li>
+                <a class="text-secondary" href="https://www.linkedin.com/sharing/share-offsite/?url={{frappe.utils.get_url()}}/{{blog2.route}}" target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </li>
+              <li>
+                <a class="text-secondary" href="mailto:?subject={{blog2.title}}&body={{frappe.utils.get_url()}}/{{blog2.route}}" target="_blank"
+                  ><i class="fa-solid fa-envelope"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+          <span class="post">Published on {{ frappe.format_date(blog2.published_on) }}</span>
+        </div>
+		{% if disable_comments %}
+        <div class="comments">
+          
+          {% if not disable_comments %}
+          <div class="blog-comments">
+            {% include 'templates/includes/comments/comments.html' %}
+          </div>
+          {% endif %}
+      	</div>
+		{% endif %}
+		</div>
+      </div>
+    </div>
+  </div>
+  <!-- End Details -->
+  <script>
+    frappe.ready(function() {
+		let guest_allowed = parseInt("{{ guest_allowed or 0}}");
+		let comment_count = "{{ comment_count }}";
+		let full_name = ""
+		let user_id = "";
+
+		let update_timeline_line_length = function(direction, size) {
+			if ($('.blog-container').length) {
+				if (direction == 'top') {
+					$('.blog-container')[0].style.setProperty('--comment-timeline-top', size);
+				} else {
+					let comment_timeline_bottom = $('.comment-list .comment-row:last-child').height() - 10;
+					$('.blog-container')[0].style.setProperty('--comment-timeline-bottom', comment_timeline_bottom +'px');
+				}
+			}
+		}
+
+		let show_comment_box = function() {
+			$('.comment-form-wrapper').show();
+			update_timeline_line_length('top', '-20px');
+			$('.add-comment-hr').hide();
+			$('.add-comment').hide();
+		}
+
+		let hide_comment_box = function() {
+			$('.comment-form-wrapper').hide();
+			update_timeline_line_length('top', '8px');
+			update_timeline_line_length('bottom');
+			$('.add-comment-hr').show();
+			$('.add-comment').show();
+		}
+
+		let $comment_count = $(`
+			<div class="feedback-item comments">
+				<span class="comment-icon">${frappe.utils.icon('small-message', 'md')}</span>
+				<span class="comment-count">${comment_count}</span>
+			</div>
+		`);
+
+		$('form').keydown(function(event) {
+			if (event.ctrlKey && event.keyCode === 13) {
+				$(this).find('#submit-comment').trigger('click');
+			}
+		})
+
+		if (!frappe.is_user_logged_in()) {
+			$(".user-details").toggle('hide');
+			if (guest_allowed) {
+				$('.start-discussion').removeClass('hidden');
+			} else {
+				$(".login-required, .comment-form-wrapper").toggleClass("hidden");
+
+				$('.add-comment-button').text('{{ _("Login to comment") }}');
+				$('.add-comment-button').click(() => {
+					window.location.href = '/login?redirect-to={{ pathname }}';
+				});
+			}
+		} else {
+			$('input.comment_by').prop("disabled", true);
+			$('input.comment_email').prop("disabled", true);
+
+			full_name = frappe.get_cookie("full_name");
+			user_id = frappe.get_cookie("user_id");
+			if(user_id != "Guest") {
+				$("[name='comment_email']").val(user_id);
+				$("[name='comment_by']").val(full_name);
+			}
+
+			$('.start-discussion').removeClass('hidden');
+		}
+
+		$('.blog-feedback').append($comment_count);
+		$("#comment-form textarea").val("");
+
+		update_timeline_line_length('bottom');
+
+		let n_comments = $(".comment-row").length;
+		n_comments ? $(".no_comment").toggle(false) : show_comment_box();
+
+		if(n_comments > 50) {
+			$(".add-comment").toggle(false)
+				.parent().append("<div class='text-muted'>Comments are closed.</div>")
+		}
+
+		$('.add-comment-button').click(() => {
+			show_comment_box();
+		});
+
+		$("#submit-comment").click(function() {
+			var args = {
+				comment_by: $("[name='comment_by']").val(),
+				comment_email: $("[name='comment_email']").val(),
+				comment: $("[name='comment']").val(),
+				reference_doctype: "{{ reference_doctype or doctype }}",
+				reference_name: "{{ reference_name or name }}",
+				comment_type: "Comment",
+				route: "{{ pathname }}",
+			}
+
+			if(!args.comment_by || !args.comment_email || !args.comment) {
+				frappe.msgprint('{{ _("All fields are necessary to submit the comment.") }}');
+				return false;
+			}
+
+			if (args.comment_email!=='Administrator' && !validate_email(args.comment_email)) {
+				frappe.msgprint('{{ _("Please enter a valid email address.") }}');
+				return false;
+			}
+
+			if(!args.comment || !args.comment.trim()) {
+				frappe.msgprint('{{ _("Please add a valid comment.") }}');
+				return false;
+			}
+
+			frappe.call({
+				btn: this,
+				type: "POST",
+				method: "frappe.templates.includes.comments.comments.add_comment",
+				args: args,
+				callback: function(r) {
+					if(r.exc) {
+						if(r._server_messages)
+							frappe.msgprint(r._server_messages);
+					} else {
+						if (r.message) {
+							$(r.message).prependTo(".comment-list");
+							comment_count = cint(comment_count) + 1;
+							$('.comment-count').text(comment_count);
+						}
+						$(".no-comment").toggle(false);
+						$("#comment-form textarea").val("");
+						hide_comment_box();
+					}
+				}
+			})
+
+			return false;
+		});
+	});
+  </script>
+  {% endblock %}

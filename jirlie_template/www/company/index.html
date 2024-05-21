@@ -1,0 +1,239 @@
+{% extends "templates/jirlie_web.html" %} {% block title %} Jirlie | Home
+{%endblock %} {% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+
+<!-- Start Company -->
+<div style="min-height: 100dvh" class="company text-center mt-5">
+  <div class="container">
+    <!-- Search -->
+    <div class="input-group justify-content-center mb-5">
+      <div class="form-outline">
+        <input type="search" id="form1" class="form-control" />
+      </div>
+      <button type="button" id="searchButton" class="btn btn-primary">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+
+    <!-- Select dropdown for filtering -->
+    <select
+      style="width: fit-content"
+      id="filterSelect"
+      class="form-select mb-5"
+    >
+      <option selected id="all-select">All</option>
+      {% for industry in all_industry %}
+      <option>{{ industry }}</option>
+      {% endfor %}
+    </select>
+    <div class="row filter-list"></div>
+  </div>
+</div>
+<!-- End Company -->
+<script>
+  // Get the select element and filter list
+  const filterSelect = document.getElementById("filterSelect");
+  const filterList = document.querySelector(".filter-list");
+  // Function to filter and update the company list
+  function filterCompanies(selectedCategory) {
+    fetch(`/api/method/jirlie_template.api.industry?domain=${selectedCategory}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        filterList.innerHTML = ""; // Clear the current list
+
+        data.message.data.forEach((el) => {
+          // Create company elements and append them to the list
+          const col = document.createElement("div");
+          col.className = "col-md-6 col-lg-4 mb-4";
+          filterList.appendChild(col);
+
+          const feat = document.createElement("div");
+          feat.className = "feat mb-3 rounded";
+          col.appendChild(feat);
+
+          const linkCompany = document.createElement("a");
+          linkCompany.href = `/company/profile/${el.company_name}`;
+          feat.appendChild(linkCompany);
+
+          const imgCompany = document.createElement("img");
+          imgCompany.className = "mb-3 rounded-top";
+          imgCompany.src = `${el.company_logo}`;
+          linkCompany.appendChild(imgCompany);
+
+          const title = document.createElement("div");
+          title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
+          feat.appendChild(title);
+
+          const headCompany = document.createElement("h4");
+          headCompany.className = "fs-6 mb-2 fw-bold";
+          headCompany.appendChild(document.createTextNode(el.company_name));
+
+          const linkCompanyTwo = document.createElement("a");
+          linkCompanyTwo.href = `/company/profile/${el.name}`;
+          linkCompanyTwo.appendChild(headCompany);
+          title.appendChild(linkCompanyTwo);
+        });
+      });
+  }
+
+  // Add an event listener to the select element
+  filterSelect.addEventListener("change", function () {
+    const selectedCategory = filterSelect.value;
+    if (selectedCategory === "All") {
+      fetch(`https://jirlie.com/api/method/jirlie_template.api.industry`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          filterList.innerHTML = ""; // Clear the current list
+
+          data.message.data.forEach((el) => {
+            // Create company elements and append them to the list
+            const col = document.createElement("div");
+            col.className = "col-md-6 col-lg-4 mb-4";
+            filterList.appendChild(col);
+
+            const feat = document.createElement("div");
+            feat.className = "feat mb-3 rounded";
+            col.appendChild(feat);
+
+            const linkCompany = document.createElement("a");
+            linkCompany.href = `/company/profile/${el.company_name}`;
+            feat.appendChild(linkCompany);
+
+            const imgCompany = document.createElement("img");
+            imgCompany.className = "mb-3 rounded-top";
+            imgCompany.src = `${el.company_logo}`;
+            linkCompany.appendChild(imgCompany);
+
+            const title = document.createElement("div");
+            title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
+            feat.appendChild(title);
+
+            const headCompany = document.createElement("h4");
+            headCompany.className = "fs-6 mb-2 fw-bold";
+            headCompany.appendChild(document.createTextNode(el.company_name));
+
+            const linkCompanyTwo = document.createElement("a");
+            linkCompanyTwo.href = `/company/profile/${el.name}`;
+            linkCompanyTwo.appendChild(headCompany);
+            title.appendChild(linkCompanyTwo);
+          });
+        });
+    } else if (selectedCategory) {
+      filterCompanies(selectedCategory); // Apply the filter
+    } else {
+      filterList.innerHTML = ""; // Clear the list if no category is selected
+    }
+  });
+
+  // Initial fetch on page load
+  window.addEventListener("load", () => {
+    // filterCompanies(""); // Load all companies initially
+    fetch(`https://jirlie.com/api/method/jirlie_template.api.industry`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        filterList.innerHTML = ""; // Clear the current list
+
+        data.message.data.forEach((el) => {
+          // Create company elements and append them to the list
+          const col = document.createElement("div");
+          col.className = "col-md-6 col-lg-4 mb-4";
+          filterList.appendChild(col);
+
+          const feat = document.createElement("div");
+          feat.className = "feat mb-3 rounded";
+          col.appendChild(feat);
+
+          const linkCompany = document.createElement("a");
+          linkCompany.href = `/company/profile/${el.company_name}`;
+          feat.appendChild(linkCompany);
+
+          const imgCompany = document.createElement("img");
+          imgCompany.className = "mb-3 rounded-top";
+          imgCompany.src = `${el.company_logo}`;
+          linkCompany.appendChild(imgCompany);
+
+          const title = document.createElement("div");
+          title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
+          feat.appendChild(title);
+
+          const headCompany = document.createElement("h4");
+          headCompany.className = "fs-6 mb-2 fw-bold";
+          headCompany.appendChild(document.createTextNode(el.company_name));
+
+          const linkCompanyTwo = document.createElement("a");
+          linkCompanyTwo.href = `/company/profile/${el.name}`;
+          linkCompanyTwo.appendChild(headCompany);
+          title.appendChild(linkCompanyTwo);
+        });
+      });
+  });
+</script>
+ ذ  
+<script>
+  // Add an event listener to the search button
+  const searchButton = document.getElementById("searchButton");
+  searchButton.addEventListener("click", handleSearch);
+
+  // Add an event listener to the search input for Enter key press
+  const searchInput = document.getElementById("form1");
+  searchInput.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  });
+
+  function handleSearch() {
+    const searchInputValue = searchInput.value;
+    fetch(`https://jirlie.com/api/method/jirlie_template.api.industry`)
+      .then((response) => response.json())
+      .then((data) => {
+        filterList.innerHTML = ""; // Clear the current list
+
+        data.message.data.forEach((el) => {
+          if (
+            el.company_name
+              .toLowerCase()
+              .includes(searchInputValue.toLowerCase())
+          ) {
+            // Create company elements and append them to the list
+            const col = document.createElement("div");
+            col.className = "col-md-6 col-lg-4 mb-4";
+            filterList.appendChild(col);
+
+            const feat = document.createElement("div");
+            feat.className = "feat mb-3 rounded";
+            col.appendChild(feat);
+
+            const linkCompany = document.createElement("a");
+            linkCompany.href = `/company/profile/${el.company_name}`;
+            feat.appendChild(linkCompany);
+
+            const imgCompany = document.createElement("img");
+            imgCompany.className = "mb-3 rounded-top";
+            imgCompany.src = `${el.company_logo}`;
+            linkCompany.appendChild(imgCompany);
+
+            const title = document.createElement("div");
+            title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
+            feat.appendChild(title);
+
+            const headCompany = document.createElement("h4");
+            headCompany.className = "fs-6 mb-2 fw-bold";
+            headCompany.appendChild(document.createTextNode(el.company_name));
+
+            const linkCompanyTwo = document.createElement("a");
+            linkCompanyTwo.href = `/company/profile/${el.name}`;
+            linkCompanyTwo.appendChild(headCompany);
+            title.appendChild(linkCompanyTwo);
+          }
+        });
+      });
+  }
+</script>
+
+{% endblock %}

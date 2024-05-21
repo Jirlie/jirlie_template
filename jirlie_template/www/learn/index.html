@@ -1,0 +1,71 @@
+{% extends "templates/jirlie_web.html" %} {% block title %} Jirlie Cloud |
+Learning something will make you a living, Learning Jirlie will make you a
+fortune {% endblock %} {% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+<style>
+  .footer {
+    position: relative;
+    z-index: 1000;
+  }
+</style>
+<!-- Start Learn -->
+<div class="learn pb-5">
+  <div class="page d-flex">
+    <header class="header">
+      <div class="header_in">
+        <button
+          style="z-index: 999"
+          type="button"
+          class="btn-side toggle position-fixed"
+          id="toggle"
+        >
+          <span></span>
+        </button>
+      </div>
+      <div class="sidebar" id="sidebar">
+        <ul class="p-0 pt-4 d-flex flex-column gap-1">
+          <h5 class="ps-3"><a style="color: #2196f3" href="#">Learn</a></h5>
+          {% for learn2_cat in learn2_cat %}
+          <li>
+            <a class="" href="learn/learn-details/{{learn2_cat.route}}"
+              >{{learn2_cat.title}}</a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </header>
+    <div class="content">
+      <div class="container">
+        <h2>{{ learn.title }}</h2>
+        <div class="cont-1">
+          <p>&nbsp;</p>
+          {{ learn.content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Learn -->
+
+<script>
+  // Start Toggle Menu
+  var btn = document.querySelector(".toggle");
+  var btnst = true;
+  btn.onclick = function () {
+    if (btnst == true) {
+      document.querySelector(".toggle span").classList.add("toggle");
+      document.getElementById("sidebar").classList.add("sidebarshow");
+      btnst = false;
+    } else if (btnst == false) {
+      document.querySelector(".toggle span").classList.remove("toggle");
+      document.getElementById("sidebar").classList.remove("sidebarshow");
+      btnst = true;
+    }
+  };
+  // End Toggle Menu
+</script>
+
+{% endblock %}

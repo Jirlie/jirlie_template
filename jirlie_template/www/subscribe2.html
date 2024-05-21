@@ -1,0 +1,97 @@
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Jirlie | Subscribe
+{% endblock %}
+{% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+    <!-- Start Pricing -->
+    <div class="pricing mb-5">
+      <div class="container">
+        <h1 class="text-center mb-4 mt-5">Please Give Information</h1>
+        <!-- <div class="line">
+          <span class="active">1</span>
+          <span>2</span>
+          <span>3</span>
+        </div> -->
+        <div class="price">
+          <div class="row">
+            <div class="col-md-6 col-lg-4">
+              <div class="boxes border border-secondary rounded">
+                <div
+                  class="first-content d-flex flex-column gap-1 text-center border-bottom border-secondary p-4"
+                >
+                  <span class="fw-bold">{{ basic.name }}</span>
+                  <div class="price position-relative">
+                    <h1 class="fw-bold">{{ basic.cost }}</h1>
+                    <span class="currency position-absolute fw-bold">$</span>
+                  </div>
+                  <span>{{ basic.description }}</span>
+                  <a class="btn main-btn info-btn mt-4" href="#">Subscribe</a>
+                </div>
+                <div class="second-content mb-3 pe-3 ps-3">
+                  {% for basic_perks in basic_perks %}
+                  <div class="check d-flex align-items-center gap-2 mt-3">
+                    <i class="fa-solid fa-check text-primary"></i>
+                    <span class="fw-bold">{{ basic_perks.title }}</span>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="boxes border border-secondary rounded">
+                <div
+                  class="first-content d-flex flex-column gap-1 text-center border-bottom border-secondary p-4"
+                >
+                  <span class="fw-bold">{{ advanced.name }}</span>
+                  <div class="price position-relative">
+                    <h1 class="fw-bold">{{ advanced.cost }}</h1>
+                    <span class="currency position-absolute fw-bold">$</span>
+                  </div>
+                  <span>{{ advanced.description }}</span>
+                  <a class="btn main-btn info-btn mt-4" href="#">Subscribe</a>
+                </div>
+                <div class="second-content mb-3 pe-3 ps-3">
+                  {% for advanced_perks in advanced_perks %}
+                  <div class="check d-flex align-items-center gap-2 mt-3">
+                    <i class="fa-solid fa-check text-primary"></i>
+                    <span class="fw-bold">{{ advanced_perks.title }}</span>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="boxes border border-secondary rounded">
+                <div
+                  class="first-content d-flex flex-column gap-1 text-center border-bottom border-secondary p-4"
+                >
+                  <span class="fw-bold">{{ premium.name }}</span>
+                  <div class="price position-relative">
+                    <h1 class="fw-bold">{{ premium.cost }}</h1>
+                    <span class="currency position-absolute fw-bold">$</span>
+                  </div>
+                  <span>{{ premium.description }}</span>
+                  <a class="btn main-btn info-btn mt-4" href="#">Subscribe</a>
+                </div>
+                <div class="second-content mb-3 pe-3 ps-3">
+                  {% for premium_perks in premium_perks %}
+                  <div class="check d-flex align-items-center gap-2 mt-3">
+                    <i class="fa-solid fa-check text-primary"></i>
+                    <span class="fw-bold">{{ premium_perks.title }}</span>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <a style="width: fit-content;" class="btn main-btn ms-auto d-block" href="#">Next</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Pricing -->
+{% endblock %}

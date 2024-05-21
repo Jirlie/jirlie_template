@@ -1,0 +1,60 @@
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Jirlie Cloud | Breaking news about Neu Ocean and Jirlie
+{% endblock %}
+{% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+
+<!-- Start News -->
+<h1 style="font-size: 3rem;" class="text-center mt-4">News</h1>
+<p class="w-75 text-center m-auto">Reporting on the business of digital transformation, automation and IoT, we announce
+    all breaking news
+    about us, our products, services, events, promotions and the trends in our industry.</p>
+<div class="news mt-5">
+  <div class="container">
+    <div class="row">
+      {% for post in blogs %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="box m-auto position-relative">
+          <div class="pic w-100">
+            <a href="/{{ post.route }}">
+            <img class="mw-100 rounded" src="{{ post.cover_image }}" alt="{{ post.title }} - Cover Image" />
+            </a>
+          </div>
+          <div
+            class="post-name pt-3 d-flex justify-content-between align-items-center ps-3 pb-2 border-bottom mt-4"
+          >
+            <div class="info d-flex gap-2">
+              <a href="/blog?blogger={{ post.blogger }}">
+              <img class="position-absolute" src="{{ post.avatar }}" alt="{{ post.blogger }}" />
+              </a>
+              <div class="name d-flex flex-column">
+                <a href="/blog?blogger={{ post.blogger }}">
+                <span>{{ post.blogger }}</span>
+                </a>
+                <span>{{ frappe.format_date(post.published_on) }} - {{ post.read_time }} min read</span>
+              </div>
+            </div>
+          </div>
+          <a href="/news/{{post.blog_category}}">
+          <p class="desc d-flex flex-column gap-2 p-2 text-primary">{{ post.category.title }}</p>
+          </a>
+          <a
+            href="/{{ post.route }}"
+            class="desc d-flex flex-column gap-2 p-3"
+          >
+            <h4>{{ post.title }}</h4>
+            <p class="mb-4" style="word-break: break-word;">
+              {{ post.intro }}
+            </p>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- End News -->
+{% endblock %}

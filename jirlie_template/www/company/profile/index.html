@@ -1,0 +1,449 @@
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Jirlie | Home
+{% endblock %}
+{% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+
+<!-- Start Tabs -->
+<div class="main-profile pt-4 border-bottom pb-3">
+    <div class="container">
+        <div class="main-info d-flex align-items-center flex-column flex-lg-row gap-3">
+            <div class="pic d-flex align-items-center border">
+                <img src="{{ companies2.company_logo }}" alt="">
+            </div>
+            <div style="flex: 1;" class="main-icon d-flex justify-content-center flex-column gap-3">
+              <div class="main-name d-flex flex-column gap-3">
+                  <div class="orga d-flex gap-2 align-items-center">
+                      <i class="fa-regular fa-building"></i>
+                      <p class="fw-bold">Jirlie ID: <span class="fw-normal">{{companies2.jirlie_id}}</span></p>
+                  </div>
+                  <h1>{{ companies2.name }}
+                  </h1>
+              </div>
+              <div class="ltd-icon d-flex flex-column flex-lg-row gap-2 justify-content-around">
+                <div class="ltd d-flex gap-2 align-items-center">
+                  <i class="fa-solid fa-location-dot fs-5"></i>
+                  <p class="fw-bold">{{companies2.citytown or ""}}, {{companies2.country or ""}}</p>
+                </div>
+                <div class="ltd d-flex gap-2 align-items-center">
+                  <i class="fa-solid fa-building fs-5"></i>
+                  <p class="fw-bold">{{ companies2.domain }}</p>
+                </div>
+                <div class="ltd d-flex gap-2 align-items-center">
+                  <i class="fa-solid fa-users-line fs-5"></i>
+                  <p class="fw-bold">{{ companies2.company_size }}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="tabs mb-5">
+        <div class="container">     
+    <div style="box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);" class="container-fluid p-0">
+        <ul class="nav nav-pills nav-justified">
+            <li class="nav-item">
+                <a class="nav-link active" href="#subscribed" data-toggle="tab">Home</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#eventPassed" data-toggle="tab">About</a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="#eventNow" data-toggle="tab">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#eventIncoming" data-toggle="tab">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#eventCreation" data-toggle="tab">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <style>
+    .tab-content {margin-left:14px;}
+    </style>
+    <!-- Pills content -->
+    <div class="tab-content" id="ex2-content">
+      <div
+        class="tab-pane fade show active"
+        id="subscribed"
+        role="tabpanel"
+        aria-labelledby="ex3-tab-1"
+      >
+      <div class="profile m-auto rounded">
+        <div class="details p-2">
+          <div class="row">
+            <div class="col-lg-6 mb-3">
+              <div class="detail  d-flex flex-column gap-3">
+                <div class="detail-1 d-flex flex-column gap-3">
+                  <p>{{ companies2.company_description }}</p>    
+                </div>
+                <div class="detail-2 d-flex flex-column gap-3">
+                  
+                  <div class="ltd d-flex gap-3 align-items-center">
+                    <i class="fa-solid fa-globe fs-5"></i>
+                    <a href="{{ companies2.website }}" target="_blank" id="siteLink">{{ companies2.website }}</a>
+                  </div>
+                 
+                  <div class="ltd d-flex gap-3 align-items-center">
+                    <i class="fa-solid fa-city fs-5"></i>
+                    <p>
+                      {{ companies2.address_line_1 or ""}}, {{ companies2.address_line_2 or ""}} {{ companies2.citytown or ""}} {{ companies2.postal_code or ""}}, {{ companies2.country or ""}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              {% if companies2.picture_1 %}
+              <div class="pic mb-3">
+                <img style="width: 500px;
+                height: 250px;
+                object-fit: cover;" class="mw-100" src="{{companies2.picture_1 or "No Picture"}}" alt="No Picture">
+              </div>
+              {% endif %}
+              {% if companies2.picture_1 %}
+              <div class="pic mb-3">
+                <img style="width: 500px;
+                height: 250px;
+                object-fit: cover;" class="mw-100" src="{{companies2.picture_2 or "No Picture"}}" alt="No Picture">
+              </div>
+              {% endif %}
+              {% if companies2.picture_1 %}
+              <div class="pic mb-3">
+                <img style="width: 500px;
+                height: 250px;
+                object-fit: cover;" class="mw-100" src="{{companies2.picture_3 or "No Picture"}}" alt="No Picture">
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <!-- <h4 class="text-primary ps-3 mt-5">Similar Companies</h4>
+        <section class="section slider-section">
+          <div class="container slider-column">
+            <div class="swiper swiper-slider">
+              <div class="swiper-wrapper">
+                {% for sim in sim %}
+                <a href="/company/profile/{{ sim.name }}" class="swiper-slide text-primary text-center bg-white">
+                  <img class="mw-100 mb-3 rounded-top" src="{{sim.company_logo}}" alt="" style="height: 250px; width: 550px; object-fit: contain;">
+                  <h4>{{sim.name}}</h4>
+                </a>
+                {% endfor %}
+              </div>
+              <span class="swiper-pagination"></span>
+              <span class="swiper-button-prev"></span>
+              <span class="swiper-button-next"></span>
+            </div>
+          </div>
+        </section> -->
+        </main>
+      </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="eventPassed"
+        role="tabpanel"
+        aria-labelledby="ex3-tab-2"
+      >
+        <div class="about mb-5">
+          <h2 class="text-center fw-bold mb-4">About Our Company</h2>
+          <p class="text-center" style="line-height: 1.6;">{{companies2.brief}}
+              </p>
+
+        </div>
+        <div class="row">
+          {% if companies2.brief_1 %}
+          <div class="col-lg-4 col-md-6 mb-3">
+            <div style="background-color: #87B7E5; height: 500px;" class="about-us text-white p-4">
+              <h1 class="fw-bold">01</h1>
+              <p>{{companies2.brief_1}}</p>
+            </div>
+          </div>
+          {% endif %}
+          {% if companies2.brief_2 %}
+          <div class="col-lg-4 col-md-6 mb-3">
+            <div style="background-color: #EDF4FB; height: 500px;" class="about-us text-black p-4">
+              <h1 class="fw-bold">02</h1>
+              <p>{{companies2.brief_2}}</p>
+            </div>
+          </div>
+          {% endif %}
+          {% if companies2.brief_3 %}
+          <div class="col-lg-4 col-md-6">
+            <div style="background-color: #1E4870; height: 500px;" class="about-us text-white p-4">
+              <h1 class="fw-bold">03</h1>
+              <p>{{companies2.brief_3}}</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="eventNow"
+        role="tabpanel"
+        aria-labelledby="ex3-tab-3"
+      >
+      <div id="row" class="row">
+        <!-- <div class="col-md-6 col-lg-4 mb-4 ps-0">
+          <div class="box m-auto card border overflow-hidden">
+            <div class="pic w-100">
+              <img style="height: 200px;" class="mw-100 w-100" src="./img/sol-1.jpeg" alt="" />
+            </div>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <h5 class="ps-3 pt-2 text-black">Embrace the Changes</h5>
+            </a>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <p class="mb-4 p-3 text-secondary">
+                Today, we live in a totally different world. Because of the
+                internet of things, our work habits, management styles, and
+                company processes...
+              </p>
+            </a>
+            <a style="
+            width: fit-content;
+            align-self: flex-end;
+            margin-right: 1rem;
+            margin-bottom: 1rem;" href="{{companies2.website}}/" class="btn main-btn d-flex align-items-center justify-content-center ">More details</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4 ps-0">
+          <div id="product-box" class="box m-auto card border overflow-hidden">
+            <div id="main-pic" class="pic w-100">
+              <img style="height: 200px;" class="mw-100 w-100" src="./img/sol-2.jpeg" alt="" />
+            </div>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <h5 class="ps-3 pt-2 text-black">Embrace the Changes</h5>
+            </a>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <p class="mb-4 p-3 text-secondary">
+                Today, we live in a totally different world. Because of the
+                internet of things, our work habits, management styles, and
+                company processes...
+              </p>
+            </a>
+            <a style="
+            width: fit-content;
+            align-self: flex-end;
+            margin-right: 1rem;
+            margin-bottom: 1rem;" href="#" class="btn main-btn d-flex align-items-center justify-content-center ">More details</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4 ps-0">
+          <div class="box m-auto card border overflow-hidden">
+            <div class="pic w-100">
+              <img style="height: 200px;" class="mw-100 w-100" src="./img/sol-1.jpeg" alt="" />
+            </div>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <h5 class="ps-3 pt-2 text-black">Embrace the Changes</h5>
+            </a>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <p class="mb-4 p-3 text-secondary">
+                Today, we live in a totally different world. Because of the
+                internet of things, our work habits, management styles, and
+                company processes...
+              </p>
+            </a>
+            <a style="
+            width: fit-content;
+            align-self: flex-end;
+            margin-right: 1rem;
+            margin-bottom: 1rem;" href="#" class="btn main-btn d-flex align-items-center justify-content-center ">More details</a>
+          </div>
+        </div> -->
+      </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="eventIncoming"
+        role="tabpanel"
+        aria-labelledby="ex3-tab-3"
+      >
+      <div id="rows" class="row">
+        <!-- <div class="col-md-6 col-lg-4 mb-4 ps-0">
+          <div class="box m-auto card border overflow-hidden">
+            <div class="pic w-100">
+              <img style="height: 200px;" class="mw-100 w-100" src="../img/new-6.jpeg" alt="" />
+            </div>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2 border-bottom"
+            >
+              <h5 class="ps-3 pt-2 text-black">Embrace the Changes</h5>
+            </a>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <p class="mb-4 p-3 text-secondary">
+                Today, we live in a totally different world. Because of the
+                internet of things, our work habits, management styles, and
+                company processes...
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4 ps-0">
+          <div class="box m-auto card border overflow-hidden">
+            <div class="pic w-100">
+              <img style="height: 200px;" class="mw-100 w-100" src="../img/new-4.jpeg" alt="" />
+            </div>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2 border-bottom"
+            >
+              <h5 class="ps-3 pt-2 text-black">Embrace the Changes</h5>
+            </a>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <p class="mb-4 p-3 text-secondary">
+                Today, we live in a totally different world. Because of the
+                internet of things, our work habits, management styles, and
+                company processes...
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4 ps-0">
+          <div class="box m-auto card border overflow-hidden">
+            <div class="pic w-100">
+              <img style="height: 200px;" class="mw-100 w-100" src="../img/new-5.jpeg" alt="" />
+            </div>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2 border-bottom"
+            >
+              <h5 class="ps-3 pt-2 text-black">Embrace the Changes</h5>
+            </a>
+            <a
+              href="#"
+              class="desc d-flex flex-column gap-2"
+            >
+              <p class="mb-4 p-3 text-secondary">
+                Today, we live in a totally different world. Because of the
+                internet of things, our work habits, management styles, and
+                company processes...
+              </p>
+            </a>
+          </div>
+        </div> -->
+      </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="eventCreation"
+        role="tabpanel"
+        aria-labelledby="ex3-tab-3"
+      >
+        <div class="row">
+          <div class="col-lg-6">
+            <h2 class="fw-bold text-center mb-3" style="display: none;">Let's get in touch</h2>
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName">
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName">
+              </div>
+              <div class="col-12 d-flex flex-column">
+                <label for="inputPhone" class="form-label">phone</label>
+                <input id="phone" type="tel" name="phone" class="form-control" />
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Company</label>
+                <input type="text" class="form-control" id="companyName">
+              </div>
+              <div class="col-12">
+                <label for="inputAddress2" class="form-label">Job Title</label>
+                <input type="text" class="form-control" id="jobTitle">
+              </div>
+              <div class="col-12">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email">
+              </div>
+              <div class="col-12">
+                <label for="inputSub" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="Subject" />
+              </div>
+              <div class="col-12">
+                <label for="textArea" class="form-label">Message</label>
+                <textarea class="form-control" id="textArea" cols="54" rows="4" placeholder="Add Your Message"></textarea>
+              </div>
+              <div class="col-12">
+                <button id="contactButton" type="submit" class="btn main-btn d-block mb-4 me-auto ms-auto">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6">
+            <div style="margin-top: 31px">
+            <div class="ltd d-flex gap-3 align-items-center mb-4">
+              <i class="fa-solid fa-phone fs-5"></i>
+              <p>
+                {{ companies2.phone_no }}
+              </p>
+            </div>
+            <div class="ltd d-flex gap-3 align-items-center">
+              <i class="fa-solid fa-envelope fs-5"></i>
+              <p>{{companies2.email}}</p>
+            </div>
+          </div>
+          {% if companies2.google_map_iframe %}
+            <div class="image" style="margin-top: 15px;">
+              {{companies2.google_map_iframe or "" }}
+            </div>
+          {% else %}
+          <div style="margin-top: 200px; text-align: center; font-weight: bold; border: 1px solid;">
+            Location Not Available
+          </div>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+<!-- End Tabs -->
+<style>
+  iframe {
+    height: 540px;
+  }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('nav a').click(function () {
+            $('nav a').removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+</script>
+{% endblock %}

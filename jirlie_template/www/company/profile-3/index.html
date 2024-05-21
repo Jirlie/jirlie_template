@@ -1,0 +1,111 @@
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Neu Ocean
+Technologies | Comprehensive and sophesticated digital transformation
+solutions
+{% endblock %}
+{% block content %}
+
+  <div class="arrow">
+      <i class="fa-solid fa-angle-up"></i>
+  </div>
+
+  <!-- Start Profile -->
+  <div class="profile-company pt-5">
+    <div class="container">
+      <div class="profile m-auto rounded">
+        <div class="profile-name d-flex align-items-center justify-content-center flex-column pt-3">
+          <div class="pic-logo">
+            <img style=
+            "width: 100px;" class="mw-100" src="{{ companies2.company_logo }}" alt="">
+          </div>
+          <span class="fw-bold mt-3">{{ companies2.name }}</span>
+          <p class="mb-3 ps-2 pe-2 text-center">{{ companies2.tagline }}
+          </p>
+        </div>
+        <div class="ltd-icon d-flex flex-column flex-lg-row gap-2 justify-content-around  border-bottom pb-2 ps-3">
+          <div class="ltd d-flex gap-2 align-items-center">
+            <i class="fa-solid fa-location-dot fs-5"></i>
+            <p class="fw-bold">{{companies2.citytown or ""}}, {{companies2.country or ""}}</p>
+          </div>
+          <div class="ltd d-flex gap-2 align-items-center">
+            <i class="fa-solid fa-building fs-5"></i>
+            <p class="fw-bold">{{ companies2.domain }}</p>
+          </div>
+          <div class="ltd d-flex gap-2 align-items-center">
+            <i class="fa-solid fa-users-line fs-5"></i>
+            <p class="fw-bold">{{ companies2.company_size }}</p>
+          </div>
+        </div>
+        <div class="details p-4">
+          <div class="row">
+            <div class="col-lg-6 mb-3">
+              <div class="detail  d-flex flex-column gap-3">
+                <div class="detail-1 d-flex flex-column gap-3">
+                  {{ companies2.company_description }}
+                 </div>
+                <div class="detail-2 d-flex flex-column gap-3">
+                  <div class="ltd d-flex gap-3 align-items-center">
+                    <i class="fa-solid fa-phone fs-5"></i>
+                    <p>{{ companies2.phone_no }}</p>
+                  </div>
+                  <div class="ltd d-flex gap-3 align-items-center">
+                    <i class="fa-solid fa-globe fs-5"></i>
+                    <a href="{{ companies2.website }}" target="_blank">{{ companies2.website }}</a>
+                  </div>
+                  <div class="ltd d-flex gap-3 align-items-center">
+                    <i class="fa-solid fa-envelope fs-5"></i>
+                    <p>{{companies2.email}}</p>
+                  </div>
+                  <div class="ltd d-flex gap-3 align-items-center">
+                    <i class="fa-solid fa-city fs-5"></i>
+                    <p>{{ companies2.address_line_1 or ""}}, {{ companies2.address_line_2 or ""}} {{ companies2.citytown or ""}} {{ companies2.postal_code or ""}}, {{ companies2.country or ""}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="pic mb-3">
+                <img style="width: 500px;
+                height: 250px;
+                object-fit: cover;" class="mw-100" src="{{companies2.picture_1}}" alt="">
+              </div>
+              <div class="pic mb-3">
+                <img style="width: 500px;
+                height: 250px;
+                object-fit: cover;" class="mw-100" src="{{companies2.picture_2}}" alt="">
+              </div>
+              <div class="pic mb-3">
+                <img style="width: 500px;
+                height: 250px;
+                object-fit: cover;" class="mw-100" src="{{companies2.picture_3}}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <h4 class="text-primary ps-3 mt-5">Similar Companies</h4>
+        <section class="section slider-section">
+          <div class="container slider-column">
+            <div class="swiper swiper-slider">
+              <div class="swiper-wrapper">
+                {% for sim in sim %}
+                <a href="/company/profile/{{ sim.name }}" class="swiper-slide text-primary text-center bg-white">
+                  <img class="mw-100 mb-3 rounded-top" src="{{sim.company_logo}}" alt="" style="height: 250px; width: 550px; object-fit: contain;">
+                  <h4>{{sim.name}}</h4>
+                </a>
+                {% endfor %}
+              </div>
+              <span class="swiper-pagination"></span>
+              <span class="swiper-button-prev"></span>
+              <span class="swiper-button-next"></span>
+            </div>
+          </div>
+        </section> -->
+        </main>
+      </div>
+    </div>
+  </div>
+  <!-- End Profile -->
+
+
+  {% endblock %}

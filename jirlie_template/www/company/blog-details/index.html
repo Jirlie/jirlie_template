@@ -1,0 +1,31 @@
+{% extends "templates/jirlie_web.html" %} {% block title %} Jirlie | Home {%
+endblock %} {% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+<!-- Start Details -->
+<body>
+  <div class="container my-5 border p-3">
+    <div class="text-secondary">
+      <div>
+        <p class="text-primary">{{blog_category_name}}</p>
+      </div>
+      <h1 class="font-weight-bold text-dark">{{title}}</h1>
+      <div class="my-3 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <img src="{{blogger_photo}}" style="width: 50px" />
+          <small class="ml-2">
+            <a href="#" class="text-primary d-block">{{blogger_full_name}}</a>
+            <span>{{published_on}}</span>
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="text-secondary">
+      <div class="my-2" style="line-height: 2">{{content}}</div>
+    </div>
+  </div>
+</body>
+<script type="module"></script>
+<!-- End Details -->
+{% endblock %}

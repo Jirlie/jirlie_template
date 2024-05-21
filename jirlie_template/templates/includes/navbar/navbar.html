@@ -1,0 +1,128 @@
+<title>
+    {% block title %}
+    {% endblock %}
+  </title>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta name="google-site-verification" content="N7AslsJpa87P78NmRlYiyRJoXX1ru6uSP7P9jyeSIPI" />
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, user-scalable=no, maximum-scale=1, minimum-scale=1" />
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
+      <link rel="stylesheet" href="/assets/jirlie_template/css/swiper.css">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <link rel="stylesheet" href="/assets/jirlie_template/css/Normalize.css" />
+      <link rel="stylesheet" href="/assets/jirlie_template/css/all.min.css" />
+      <link rel="stylesheet" href="/assets/jirlie_template/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/assets/jirlie_template/css/style.css" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Parisienne&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <link rel="icon" type="image/x-icon" href="/assets/jirlie_template/images/Jirlie .gif">
+      <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+      <script>
+        window.frappe = {};
+        frappe.ready_events = [];
+        frappe.ready = function (fn) {
+            frappe.ready_events.push(fn);
+        }
+        window.dev_server = {{ dev_server }};
+        window.socketio_port = {{ (frappe.socketio_port or 'null') }};
+        window.show_language_picker = {{ show_language_picker or 'false' }};
+    </script>
+    </head>
+    <body>
+      <script>
+        frappe.boot = {{ boot }}
+        // for backward compatibility of some libs
+        frappe.sys_defaults = frappe.boot.sysdefaults;
+        </script>
+        {{ include_script('frappe-web.bundle.js') }}
+        
+      <!-- Start Navbar -->
+      <nav class="navbar p-0 navbar-expand-lg bg-white sticky-top">
+        <div class="container">
+          <a
+            class="navbar-brand logo text-center d-flex align-items-center"
+            href="/"
+          >
+            <img style="width: 90px" src="/assets/jirlie_template/images/Jirlie .gif" alt="" />
+            <div class="anim-text" style="margin-left:20px;">Jirlie Cloud</div>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item pe-5">
+                <a class="nav-link" href="/subscribe"><button style="width: 90.72px;" class="btn btn-primary">Start</button></a>
+              </li>
+              <li class="nav-item pe-5">
+                <a class="nav-link active" style="margin-top:10px;" aria-current="page" href="/jirlie"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item pe-5">
+                <a class="nav-link" style="margin-top:10px;" href="/learn">Learn</a>
+              </li>
+              <li class="nav-item pe-5">
+                <a class="nav-link" style="margin-top:10px;" href="/support">Support</a>
+              </li>
+              <li class="pe-5">
+                <a class="nav-link" href="/company"><button style="display:none;" class="btn btn-primary">Directory</button></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <style>
+      .anim-text {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 2rem;
+        font-weight:  100;
+        letter-spacing: 2px;
+        text-align: center;
+        color: #f35626;
+        background-image: -webkit-linear-gradient(#6e64ab, #ea4498, #68c8d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: hue 10s infinite linear;
+      }
+      @media (max-width: 768px) {
+        .anim-text {
+          font-size: 1.2rem;
+        }
+      }
+      @-webkit-keyframes hue {
+        from {
+          -webkit-filter: hue-rotate(0deg);
+        }
+        to {
+          -webkit-filter: hue-rotate(-360deg);
+        }
+      }
+
+      </style>
+      <!-- End Navbar -->
+  

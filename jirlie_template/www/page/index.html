@@ -1,0 +1,15 @@
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Jirlie | Home
+{% endblock %}
+{% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+{% for page in page %}
+<div>
+  {{ page.page_blocks}}
+</div>
+
+
+{% endblock %}

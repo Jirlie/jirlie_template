@@ -38,7 +38,7 @@ app_license = "MIT"
 # ----------
 
 # application home page (will override Website Settings)
-# home_page = "login"
+home_page = "subscribe"
 
 # website user home page (by Role)
 # role_home_page = {
@@ -113,6 +113,30 @@ app_license = "MIT"
 # override_doctype_class = {
 #	"ToDo": "custom_app.overrides.CustomToDo"
 # }
+
+website_route_rules = [
+    {'from_route': '/news/news-details/<name2>', 'to_route': 'news/news-details'},
+    {'from_route': '/news/<blog_category2>', 'to_route': 'news'},
+    {"from_route": "/learn/learn-details/<docname>", "to_route": "learn/learn-details"},
+    {"from_route": "/company/profile/<com>", "to_route": "company/profile"},
+    {"from_route": "/company/product-details/<itm>", "to_route": "company/product-details"},
+    {"from_route": "/company/blog-details/<blg>", "to_route": "company/blog-details"}
+    
+]
+
+website_redirects = [
+	{"source": r"/me(.*)", "target": r"/dashboard\1"},
+]
+
+
+doc_events = {
+    "Blog Category": {
+        "validate": "jirlie_template.events.blog_category.validate"
+    },
+    "Blog Post": {
+        "validate": "jirlie_template.events.blog_post.validate"
+    }
+}
 
 # Document Events
 # ---------------

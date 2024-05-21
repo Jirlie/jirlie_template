@@ -1,0 +1,821 @@
+
+{% extends "templates/jirlie_web.html" %}
+{% block title %}
+Jirlie Cloud | Start your journey wherever your business takes you, stay connected, reachable and productive
+{% endblock %}
+{% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+<style>
+@media screen and (max-width: 992px) {
+  #login55009 input{
+    width: 100% !important;
+  }
+  #login55009 button{
+    width: 100% !important;
+  }
+  #login55009-social {
+    width: 100% !important;
+  }
+  .width-100-lg2 *{
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+  #login55009>div>p{
+    margin-bottom: 5px !important;
+  }
+  #login55009-forgot-pass{
+    width: 100% !important;
+  }
+}
+</style>
+<!-- Start Signup And Login -->
+<div id="login55009" class="login">
+  <img class="mw-100 mh-100 land" src="/assets/jirlie_template/images/mu.png" alt="">
+    <div class="container">
+	
+        <div class="sign d-flex">
+          <div style="flex: 1;" class="forms d-flex flex-column">
+            <form class="form-1">
+              <p style="font-size: 1.25rem; font-weight: bold;color: white; margin-bottom: -10px; padding-bottom: 0;" class="mb-3">Sign in to Jirlie</p>
+
+                <div class="form-group mb-3">
+                  <label for="email" style="color:white;">Email address</label>
+                  <input class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                </div> 
+                <div class="form-group mb-3">
+                  <label for="password" style="color:white;">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" id="login_btn" style="width:50%;">Sign in</button>
+                <div id="login55009-forgot-pass" class="col-lg-12 font-style-italic width-100-lg2 mb-2" style="text-align: right;width: 100%">
+                  <span class="text-primary text-white btn-pass text-center" style="color:white; font-size: 90%;font-style: italic; cursor: pointer;">Forgot password?</span>
+                </div>
+                <div class="mb-3" style="color: white;  font-weight: bold;">
+                  <!-- <p>or sign in using </p> -->
+                  <!-- <a href="https://accounts.google.com/o/oauth2/auth?redirect_uri=https%3A%2F%2Fjirlie.com%2Fapi%2Fmethod%2Ffrappe.integrations.oauth2_logins.login_via_google&state=eyJzaXRlIjogImh0dHBzOi8vYmVzdC5uYXNzZXJ4LmNvbSIsICJ0b2tlbiI6ICIwM2Y2YWU0ZWMwNGM4NmRjZmViNzBhMzUxNWY3ZmNlNGE2MTAxYjNmZTZkNjkzOTA2ZTI1ZjI4OSIsICJyZWRpcmVjdF90byI6IG51bGx9&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=872431009504-enj2b7r8drhdh4ej05gfjpe1qiglhqis.apps.googleusercontent.com" class="google-btn btn btn-light mt-2 mb-3 d-flex align-items-center gap-2 justify-content-center">
+                    <i class="fa-brands fa-google" style="color:black;"></i>
+                    <p>Sign in with Google</p>
+                  </a> -->
+                  </div>
+                <div class="col-lg-12  d-flex align-items-center width-100-lg2 mb-3">
+                    <span class="text-primary text-white mt-4 signup-btn" style="color:white; font-size:14px; margin-top: 10px !important;text-wrap: nowrap; cursor: pointer;">Don't have an account? <span style="font-weight: bold">Sign up now</span></span>
+                </div>
+              </form>
+              <form action="" class="form-2">
+                <div class="col-lg-12 mb-2">
+                  <!-- <div class="form-group">
+                    <label for="email" style="color:white;">Name</label>
+                    <input class="form-control" style="width:100%;" id="signup-name" aria-describedby="emailHelp" placeholder="Your Name">
+                  </div> -->
+                </div>
+                <div class="col-lg-12 mb-2">
+                  <p style="font-size: 1.25rem; font-weight: bold;color: white; margin-bottom: -10px; padding-bottom: 0;" class="mb-3">Sign up to Jirlie</p>
+                  <div class="form-group mb-3">
+                    <label for="email" style="color:white;">Email</label>
+                    <input class="form-control" style="width:100%;" id="signup-email" aria-describedby="emailHelp" placeholder="Email Address">
+                  </div>
+                </div>
+                  <button type="submit" class="btn btn-primary mt-2 mb-3" id="signup_btn" style="width:50%; margin: auto;;">Sign up</button>
+                  <!-- <p style="color: white;  font-weight: bold;">or sign up using </p> -->
+                  <!-- <a href="#" class="google-btn btn btn-light mt-2 mb-3 d-flex align-items-center gap-2 justify-content-center">
+                    <i class="fa-brands fa-google" style="color:black;"></i>
+                    <p>Sign in with Google</p>
+                  </a> -->
+                    <div class="col-lg-12">
+                      <span class="back-btn text-white" style="cursor: pointer;">
+                        Back to login
+                      </span>
+                    </div>
+              </form>
+              <form action="" class="form-3">
+                <div class="col-lg-12 mb-3">
+                  <p style="font-size: 1.25rem; font-weight: bold;color: white; margin-bottom: -10px; padding-bottom: 0;" class="mb-3">Reset you Password</p>
+                  <div class="form-group">
+                    <label for="reset-email" style="color:white;">Email</label>
+                    <input class="form-control" style="width:100%;" id="reset-email" aria-describedby="emailHelp" placeholder="Your Email Address">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" id="reset_btn" style="width:50%; margin: auto;;">Reset Password</button>
+                <div class="col-lg-12">
+                  <span style="cursor: pointer;" class="btn-back-two text-white">Back to login</span>
+                </div>
+              </form>
+          </div>
+              <script> 
+                const formOne = document.querySelector(".form-1");
+                const formTwo = document.querySelector(".form-2");
+                const signBtn = document.querySelector(".signup-btn");
+                const btnPass = document.querySelector(".btn-pass");
+                const formThree = document.querySelector(".form-3");
+                const btnBackLogin = document.querySelector(".back-btn")
+                const btnBackLoginTwo = document.querySelector(".btn-back-two")
+                console.log(signBtn);
+
+                signBtn.addEventListener("click", () => {
+                  formOne.style.display = `none`;
+                  formTwo.style.display = `block`;
+                });
+                btnPass.addEventListener("click", () => {
+                  formOne.style.display = `none`;
+                  formThree.style.display = `block`;
+                });
+                btnBackLogin.addEventListener("click", () => {
+                  formOne.style.display = `block`;
+                  formTwo.style.display = `none`;
+                });
+                btnBackLoginTwo.addEventListener("click", () => {
+                  formOne.style.display = `block`;
+                  formThree.style.display = `none`;
+                })
+              </script>
+              <script>
+              $(document).ready(function() {
+              $("#login_btn").click(function() {
+                  var me = this;
+                  $(this).html("Logging In...").prop("disabled", true);
+                  console.log('Done');
+                
+                  frappe.call({
+                      "method": "login",
+                      args: {
+                          usr: document.querySelector("input[id='email']").value,
+                          pwd: document.querySelector("input[id='password']").value,
+                          lead_email: $("#lead-email").val(),
+                      },
+                      callback: function(r) {
+                          $(me).prop("disabled", false);
+                          if(r.exc) {
+                              alert("Error, please contact support@jirlie.com");
+                              $(me).html("Login Failed! Try Again.").prop("disabled", false);
+                          } else {
+                              console.log("Logged In");
+                              setInterval(() => {window.location.href = "/dashboard"},window.globalinterval)
+                              
+                          }
+                      }
+                  })
+                  return false;
+                  
+              })
+                $(this).html("Logging In...").prop("disabled", false);
+              })
+
+
+              $(document).ready(function() {
+              $("#signup_btn").click(function() {
+                  var me = this;
+                  $(this).html("Signing Up...").prop("disabled", true);
+                  console.log('Done signup');
+                
+                  frappe.call({
+                      "method": "press.api.account.signup",
+                      args: {
+                          email: document.querySelector("input[id='signup-email']").value,
+                          // full_name: document.querySelector("input[id='signup-name']").value
+                          full_name: "USER"
+                      },
+                      onSuccess() {
+                        emailSent = true;
+                      },
+                      callback: function(r) {
+                          $(me).prop("disabled", false);
+                          if(r.exc) {
+                              alert("Error, please contact support@jirlie.com");
+                              $(me).html("Login Failed! Try Again.").prop("disabled", false);
+                          } else {
+                              console.log("Logged In signup");
+                              emailSent = true;
+                              frappe.msgprint("We have sent an email to verify your email and set up your account.")
+                              
+                          }
+                      }
+                  })
+                  return false;
+                  
+              })
+                  .prop("disabled", false);
+              })
+
+              // reset
+              $(document).ready(function() {
+              $("#reset_btn").click(function() {
+                  var me = this;
+                  $(this).html("Resetting...").prop("disabled", true);
+                  console.log('Done signup');
+                
+                  frappe.call({
+                      "method": "frappe.core.doctype.user.user.reset_password",
+                      args: {
+                          user: document.querySelector("input[id='reset-email']").value
+                      },
+                      callback: function(r) {
+                          $(me).prop("disabled", false);
+                          if(r.exc) {
+                              alert("Error, please contact support@jirlie.com");
+                              $(this).html("Login Failed! Try Again.").prop("disabled", false);
+                          } else {
+                              console.log("Logged In signup");
+                              emailSent = true;
+                              // frappe.msgprint("We have sent an email to verify your email and set up your account.")
+                              
+                          }
+                      }
+                  })
+                  return false;
+                  
+              })
+                  .prop("disabled", false);
+              })
+              // sep
+            //   $("#reset_btn").on("submit", function (event) {
+            //   event.preventDefault();
+            //   var args = {};
+            //   args.cmd = "frappe.core.doctype.user.user.reset_password";
+            //   args.user = ($("#email").val() || "").trim();
+            //   if (!args.user) {
+            //     login.set_status('{{ _("Valid Login id required.") }}', 'red');
+            //     return false;
+            //   }
+            //   login.call(args);
+            //   return false;
+            // });
+              </script>
+              <!-- <div class="buttons" style="margin:auto;">
+                <a class="btn main-btn sub" style="width:200px; margin-bottom: 15px; display: flex;
+                flex-direction: column;" href="/dashboard/login">Login</a>
+                <a class="btn main-btn" style="width:200px;" href="/dashboard/signup">Signup</a>
+              </div> -->
+        </div>
+    </div>
+</div>
+<!-- End Signup And Login -->
+<!-- Start Pricing -->
+<div class="pricing mb-5 mt-4 overflow-hidden">
+  <div class="container" style="margin-bottom: 30px;">
+    <h1 class="text-center">Flexible Packages</h1>
+    <p class="text-secondary" style="text-align: center; font-size:18px;">
+      Jirlie Cloud is a cloud-based platform which provides businesses with all the
+      services they could need, available on subscription basis per
+      user in affordable packages to suit small businesses and
+      people who are doing business on the go.
+    </p>
+    <p class="text-secondary mt-4" style="text-align: center; font-size:18px;">
+      Wherever your business takes you, they will stay connected,
+      reachable and productive. Subscribe for as low as GBP 17.5 per user / month.
+    </p>
+    <div class="us mt-4">
+      <!-- <span class="text-center d-block fw-bold">Subscribe for as low as US$ 17.5</span>
+      <h3 class="text-center fw-bold">US$ 17.5</h3>
+      <span class="text-center d-block fw-bold mb-4">per user / month</span> -->
+    <p class="text-secondary fs-5 text-center m-auto mb-5">
+      Choose from our flexible business models to suit various types of
+      customers with different business needs.
+    </p>
+    <div class="price">
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div style="height: 650px;" class="boxes border border-secondary rounded">
+            <div class="first-content d-flex flex-column gap-1 text-center border-bottom border-secondary position-relative p-4">
+              
+              <span class="fw-bold">Basic</span>
+              <div class="price position-relative">
+                <h1 id="price1" class="fw-bold">25.0</h1>
+                <span id="currency" class="currency position-absolute fw-bold">GBP</span>
+              </div>
+              <span>Per User / Month <br>
+(billed monthly)</span>
+              <a class="btn main-btn info-btn mt-4" id="sub">Subscribe</a>
+            </div>
+            
+            <div class="second-content mb-3 pe-3 ps-3">
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Security Updates</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Email Support</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Minimum of 2 users</span>  
+              </div>
+                            
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div style="height: 650px;" class="boxes border border-secondary rounded">
+            <div class="first-content d-flex flex-column gap-1 text-center border-bottom border-secondary p-4 position-relative overflow-hidden">
+              <!-- <div class="recomended position-absolute fw-bold text-white">Recomended</div> -->
+              
+              <div style="width: 40%; top:0; left:0;" class="pic position-absolute">
+                <img class="mw-100" src="../img/best_seller.png" alt="">
+              </div>
+              
+
+              <span class="fw-bold">Advanced</span>
+              <div class="price position-relative">
+                <h1 id="price2" class="fw-bold">21.25</h1>
+                <span id="currency" class="currency position-absolute fw-bold">GBP</span>
+              </div>
+              <span>Per User / Month <br>
+(billed bi-annually)</span>
+              <a class="btn main-btn info-btn mt-4" id="sub-1">Subscribe</a>
+            </div>
+            
+            <div class="second-content mb-3 pe-3 ps-3">
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Email Support</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Free Functional Support (2 Hours)</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Server Monitoring</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Minimum of 5 users</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Security Updates</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Product Warranty</span>  
+              </div>
+                            
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div style="height: 650px;" class="boxes border border-secondary rounded">
+            <div class="first-content d-flex flex-column gap-1 text-center border-bottom border-secondary position-relative p-4">
+              
+              <span class="fw-bold">Premium</span>
+              <div class="price position-relative">
+                <h1 id="price3" class="fw-bold">17.5</h1>
+                <span id="currency" class="currency position-absolute fw-bold">GBP</span>
+              </div>
+              <span>Per User / Month<br>
+(billed annually)</span>
+              <a class="btn main-btn info-btn mt-4" id="sub-2">Subscribe</a>
+            </div>
+            
+            <div class="second-content mb-3 pe-3 ps-3">
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Free Functional Support (5 Hours)</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Product Warranty</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Server Monitoring</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Security Updates</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Email Support</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Minimum of 10 users</span>  
+              </div>
+                            
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div style="height: 650px;" class="boxes border border-secondary rounded">
+            <div class="first-content d-flex flex-column gap-1 text-center border-bottom border-secondary position-relative p-4">
+              
+              <span class="fw-bold">Enterprise</span>
+              <div class="price position-relative">
+                <h1 class="fw-bold">&nbsp;</h1>
+                <span class="currency position-absolute fw-bold">&nbsp;&nbsp;</span>
+              </div>
+              <span><b>Corporates and Enterprises<b></b></b></span>
+              <a class="btn main-btn info-btn mt-4" href="/support">Contact Us</a>
+            </div>
+            
+            <div class="second-content mb-3 pe-3 ps-3">
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Developer Support</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Customization</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Unlimited Number of Users</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">System Implementation</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Dedicated Account Manager</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Security Updates</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold"> Lifetime Priority Email Support</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Server Monitoring</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold"> Free Functional Support (25 hours)</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Lifetime License</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">Lifetime Product Warranty</span>  
+              </div>
+              
+              <div class="check d-flex align-items-center gap-2 mt-3">
+                <i class="fa-solid fa-check text-primary"></i>
+                <span class="fw-bold">One-time Payment</span>  
+              </div>
+                            
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+</div>
+
+<script>
+  const subBtn = document.querySelector("#sub");
+  const subBtnOne = document.querySelector("#sub-1");
+  const subBtnTwo = document.querySelector("#sub-2");
+  console.log(subBtn);
+  console.log(subBtnOne);
+  console.log(subBtnTwo);
+  subBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    })
+  subBtnOne.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    })
+  subBtnTwo.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    })
+</script>
+
+
+<div class="range p-3 overflow-hidden" id="range">
+  <h5 class="text-center fw-bold w-75 m-auto mb-4 choise">
+    Make your choice from a wide range of add-ons and pay as you go
+  </h5>
+  <div class="row">
+    <div class="col-lg-6">
+      <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine"
+        class="group bg-white border rounded d-flex align-items-center text-center  rounded overflow-hidden">
+        <div class="pho">
+          <img class="mw-100" src="../img/range-3.png" alt="" />
+        </div>
+        <div class="para d-flex align-items-center text-center flex-column">
+          <h5 class="fw-bold">VoIP Calls and SMS
+          </h5>
+          <div class="para-one d-flex align-items-center flex-column">
+            <p class="rg text-secondary">
+            Integrate with your service provider and make use of our VoIP
+            Monitoring Tools and SMS messaging functions.
+          </p>
+          <p id="currency1" class="fw-bold text-center">
+            For as low as 15.00 GBP per user / month
+          </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine"
+        class="group bg-white border rounded d-flex align-items-center text-center  rounded overflow-hidden">
+        <div class="pho">
+          <img class="mw-100" src="../img/range-2.jpeg" alt="" />
+        </div>
+        <div class="para d-flex align-items-center flex-column">
+          <h5 class="fw-bold">Your Minutes of Meeting
+          </h5>
+          <div class="para-one d-flex align-items-center flex-column">
+            <p class="rg text-secondary">
+              Empower your meeting with real-time transcription that are
+              shareable, searchable, accessible and secure.
+            </p>
+            <p id="currency2" class="fw-bold text-center">For as low as 5.00 GBP per hour</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine"
+        class="group bg-white border rounded d-flex align-items-center text-center  rounded overflow-hidden">
+        <div class="pho">
+          <img class="mw-100" src="../img/range-4.png" alt="" />
+        </div>
+        <div class="para d-flex align-items-center flex-column">
+          <h5 class="fw-bold">Your Metaverse gateway</h5>
+          <div class="para-one d-flex align-items-center flex-column">
+            <p class="rg text-secondary">
+              Leverage your communications and make your metaverse
+              feature-rich with improved functionalities, and drive a more
+              immersive 3D experience.
+            </p>
+            <p class="fw-bold text-center">COMING SOON</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine"
+        class="group bg-white border rounded d-flex align-items-center rounded overflow-hidden">
+        <div class="pho">
+          <img class="mw-100" src="../img/range-1.jpg" alt="" />
+        </div>
+        <div class="para d-flex align-items-center flex-column text-center">
+          <h5 class="fw-bold">Your virtual assistant</h5>
+          <div class="para-one d-flex align-items-center flex-column">
+            <p class="rg text-secondary">
+              Talk to Jirlie and have a unique daily conversation with
+              diversity, fun and vitality.
+            </p>
+            <p class="fw-bold text-center">COMING SOON</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Range -->
+
+<!-- Start Ground -->
+<div class="ground p-4 position-relative mt-5">
+  <div class="container">
+    <div data-aos="fade-up" data-aos-duration="3000" class="picture">
+      <img class="rounded mw-100" src="../img/ground.jpeg" alt="" />
+      <div class="content bg-white rounded p-3 position-absolute d-flex flex-column">
+        <h3 class="fw-bold">With us, your business is in a good hand.</h3>
+        <p>
+          We partner with the World's top service providers to ensure that
+          we are always up and that we can serve our happy customers in all
+          countries from over 29 tier 4+ data centers across the globe.
+        </p>
+        <p>
+          Moreover, we invest in the development of our team and business
+          partners to serve you better with the most advanced and highest
+          technology solutions.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Ground -->
+
+
+
+              <!-- <div class="second-content mb-3 pe-3 ps-3">
+                <div class="check d-flex align-items-center gap-2 mt-3">
+                  <i class="fa-solid fa-check text-primary"></i> -->
+                  <span class="fw-bold"></span>  
+                </div>              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- End Pricing -->
+  
+  <!-- Start Testimonials -->
+  <!-- 
+#### EDIT
+I built this slider when I first started to learn JS, you can rebuild it with more readable, simple and less code, I'm too lazy to update it, sorry :) 
+-->
+
+<!-- 
+	use the left and right arrow keys on your keyboard or just swipe left and right on your smart phone to interact with the slider
+-->
+
+<section id="testim" class="testim">
+  <div style="text-align:center; margin-bottom: 10px;"><h2 style="margin-bottom: 20px;">Why companies like Jirlie?</h2></div>
+    <!--         <div class="testim-cover"> -->
+                <div class="wrap">
+    
+                    <span id="right-arrow" class="arrow right fa fa-chevron-right"></span>
+                    <span id="left-arrow" class="arrow left fa fa-chevron-left "></span>
+                    <ul id="testim-dots" class="dots">
+                        <li class="dot"></li><!--
+                        --><li class="dot"></li><!--
+                        --><li class="dot"></li>
+                        
+                    </ul>
+                    <div id="testim-content" class="cont">
+                        
+                        <!-- <div class="active">
+                            <h6>The system is well presented by its integration with the website, the ease that existing data can be migrated, and Jirlie, the virtual assistant who handles transactions between the system and the business partners. </h6>
+                            <div class="img"><img src="/files/bassam.webp" alt=""></div>
+                            <h2>Bassam Milan</h2>
+                            <h6>Managing Director - Steven Austin Limited</h6>
+                        </div> -->
+                        {% for testi in testi %}
+                        <div class="active">
+                          <h4>{{ testi.head_content }}</h4>
+                          <h6>{{ testi.content }}</h6>
+                          <div class="img"><img src="{{ testi.blogger_photo_link }}" alt=""></div>
+                          <h2>{{ testi.person }}</h2>
+                          <h7>{{ testi.blogger_bio }}</h7>
+                        </div>
+                        {% endfor %}
+    
+                        
+    
+                    </div>
+
+                </div>
+    <!--         </div> -->
+        </section>
+    
+    
+  <!-- End Testimonials -->
+  
+<script>
+    // Start Testimonials
+// vars
+'use strict'
+var	testim = document.getElementById("testim"),
+		testimDots = Array.prototype.slice.call(document.getElementById("testim-dots").children),
+    testimContent = Array.prototype.slice.call(document.getElementById("testim-content").children),
+    testimLeftArrow = document.getElementById("left-arrow"),
+    testimRightArrow = document.getElementById("right-arrow"),
+    testimSpeed = 4500,
+    currentSlide = 0,
+    currentActive = 0,
+    testimTimer,
+		touchStartPos,
+		touchEndPos,
+		touchPosDiff,
+		ignoreTouch = 30;
+;
+
+window.onload = function() {
+
+    // Testim Script
+    function playSlide(slide) {
+        for (var k = 0; k < testimDots.length; k++) {
+            testimContent[k].classList.remove("active");
+            testimContent[k].classList.remove("inactive");
+            testimDots[k].classList.remove("active");
+        }
+
+        if (slide < 0) {
+            slide = currentSlide = testimContent.length-1;
+        }
+
+        if (slide > testimContent.length - 1) {
+            slide = currentSlide = 0;
+        }
+
+        // if (currentActive != currentSlide) {
+        //     testimContent[currentActive].classList.add("inactive");            
+        // }
+        testimContent[slide].classList.add("active");
+        testimDots[slide].classList.add("active");
+
+        currentActive = currentSlide;
+    
+        clearTimeout(testimTimer);
+        testimTimer = setTimeout(function() {
+            playSlide(currentSlide += 1);
+        }, testimSpeed)
+    }
+
+    testimLeftArrow.addEventListener("click", function() {
+        playSlide(currentSlide -= 1);
+    })
+
+    testimRightArrow.addEventListener("click", function() {
+        playSlide(currentSlide += 1);
+    })    
+
+    for (var l = 0; l < testimDots.length; l++) {
+        testimDots[l].addEventListener("click", function() {
+            playSlide(currentSlide = testimDots.indexOf(this));
+        })
+    }
+
+    playSlide(currentSlide);
+
+    // keyboard shortcuts
+    document.addEventListener("keyup", function(e) {
+        switch (e.keyCode) {
+            case 37:
+                testimLeftArrow.click();
+                break;
+                
+            case 39:
+                testimRightArrow.click();
+                break;
+
+            case 39:
+                testimRightArrow.click();
+                break;
+
+            default:
+                break;
+        }
+    })
+		
+		testim.addEventListener("touchstart", function(e) {
+				touchStartPos = e.changedTouches[0].clientX;
+		})
+	
+		testim.addEventListener("touchend", function(e) {
+				touchEndPos = e.changedTouches[0].clientX;
+			
+				touchPosDiff = touchStartPos - touchEndPos;
+			
+				console.log(touchPosDiff);
+				console.log(touchStartPos);	
+				console.log(touchEndPos);	
+
+			
+				if (touchPosDiff > 0 + ignoreTouch) {
+						testimLeftArrow.click();
+				} else if (touchPosDiff < 0 - ignoreTouch) {
+						testimRightArrow.click();
+				} else {
+					return;
+				}
+			
+		})
+}
+// End Testimonials
+</script>
+{% endblock %}

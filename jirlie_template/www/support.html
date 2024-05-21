@@ -1,0 +1,152 @@
+{% extends "templates/jirlie_web.html" %} {% block title %} Jirlie Cloud | Get
+supported, no matter the situation, Jirlie has got your back covered {% endblock
+%} {% block content %}
+<div class="arrow">
+  <i class="fa-solid fa-angle-up"></i>
+</div>
+<!-- Start Contact -->
+<div class="contact position-relative">
+  <div class="photo">
+    <img
+      style="
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      "
+      class="mw-100 mh-100"
+      src="/assets/jirlie_template/images/mu.png"
+      alt=""
+    />
+    <!-- <div style="background-image: url("/assets/jirlie_template/images/mu.png"); max-height: 80vh;"></div> -->
+    <div class="container">
+      <div class="head-support">
+        <h1 style="font-size: 30px; font-weight: bold">
+          Let’s give your business what it needs to grow.
+        </h1>
+        <p style="width: 55%">
+          Keep the correct data and be updated with reports in real time, expand
+          your workforce with one or more instants of our virtual assistant and
+          get our business management solution customized to your requirements.
+        </p>
+        <p style="width: 55%">
+          We will take your business to the next level, automate your business
+          by getting the ultimate use of the highest technologies and achieve
+          the maximum productivity at minimal resources.
+        </p>
+        <p style="width: 55%">
+          Simply, Get everything integrated with everything in your business,
+          prevent human errors and limit human interventions and grow your
+          business with deep ‘Know Your Customer’ strategy.
+        </p>
+      </div>
+      <div class="details rounded bg-white card">
+        <div class="row">
+          <div class="col-lg-6">
+            <img
+              style="margin-top: 8.5rem"
+              class="mw-100 mh-100"
+              src="./img/support.png"
+              alt=""
+            />
+          </div>
+          <div class="col-lg-6">
+            <h4 class="text-center fw-bold">Ready to enjoy the journey</h4>
+            <p class="text-center fw-bold mb-5">
+              or wish to know more about how to get your business transformed,
+              fill the form to receive a call back.
+            </p>
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" />
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" />
+              </div>
+              <div class="col-12 d-flex flex-column">
+                <label for="inputPhone" class="form-label">Phone</label>
+                <input
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Company</label>
+                <input type="text" class="form-control" id="companyName" />
+              </div>
+              <div class="col-12">
+                <label for="inputAddress2" class="form-label">Job Title</label>
+                <input type="text" class="form-control" id="jobTitle" />
+              </div>
+              <div class="col-12">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email" />
+              </div>
+              <div class="col-12">
+                <label for="inputSub" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="Subject" />
+              </div>
+              <div class="col-12">
+                <label for="textArea" class="form-label">Message</label>
+                <textarea
+                  class="form-control"
+                  id="textArea"
+                  cols="54"
+                  rows="4"
+                  placeholder="Add Your Message"
+                ></textarea>
+              </div>
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="btn main-btn d-block mb-4 me-auto ms-auto"
+                  id="contactButton"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  //contact form
+  const contactButton = document.getElementById("contactButton");
+  contactButton.addEventListener("click", (el) => {
+    el.preventDefault();
+    fetch("https://neuocean.com/api/method/neu_ocean_template.api.contact", {
+      method: "POST",
+      body: JSON.stringify({
+        first_name: document.querySelector("input[id='firstName']").value,
+        last_name: document.querySelector("input[id='lastName']").value,
+        phone: document.querySelector("input[id='phone']").value,
+        company: document.querySelector("input[id='companyName']").value,
+        job_title: document.querySelector("input[id='jobTitle']").value,
+        email: document.querySelector("input[id='Email']").value,
+        subject: document.getElementById("Subject").value,
+        description: document.getElementById("textArea").value,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then(
+        (json) =>
+        Swal.fire(
+          "Thanks for Contact Us.",
+          "We Will be in Touch Shortly.",
+          "success"
+        )
+      );
+  });
+</script>
+<!-- End Contact -->
+{% endblock %}
