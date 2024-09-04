@@ -36,6 +36,13 @@ Jirlie | Home
                   <i class="fa-solid fa-users-line fs-5"></i>
                   <p class="fw-bold">{{ companies2.company_size }}</p>
                 </div>
+                {% if not companies2.claimed %}
+                <div class="ltd d-flex gap-2 align-items-center">
+                  <a href="/business-claim-request/new?business={{companies2.name}}&user={{frappe.session.user}}">
+                  <button type="button" class="btn btn-primary">Claim This Business</button>
+                  </a>
+                </div>
+                {% endif %}
               </div>
             </div>
         </div>

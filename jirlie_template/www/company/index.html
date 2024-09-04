@@ -1,5 +1,123 @@
-{% extends "templates/jirlie_web.html" %} {% block title %} Jirlie | Home
-{%endblock %} {% block content %}
+{% extends "templates/jirlie_web.html" %}
+{% block title %} Jirlie | Home {% endblock %}
+{% block content %}
+<style>
+  .form-select,
+  .input-group  {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .filter {
+      flex-wrap: wrap;
+    }
+    .filter .input-group {
+      justify-content:  flex-start !important ;
+    }
+  }
+  .nice-select.open .list {
+    height: 200px;
+    overflow-y: scroll;
+  }
+  .nice-select .list {
+    height: 200px;
+  }
+  .view-toggle button {
+    margin-right: 10px;
+  }
+  .view-toggle .btn.active {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+  #columnView {
+    display: none;
+  }
+  .all-row-view .col-md-6.col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    transition: .3s;
+  }
+  .all-row-view .col-md-6.col-lg-4 .feat {
+    overflow: hidden;
+    display: flex;
+  }
+  .all-row-view .col-md-6.col-lg-4 .title {
+    border: unset !important;
+  }
+  .all-row-view .col-md-6.col-lg-4 .feat img {
+    height: 140;
+    width: 120px;
+    margin: 0 !important;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+  }
+  .row-view .col-md-6.col-lg-4 {
+    flex: 0 0 33.3%;
+    max-width: 100%;
+    transition: 0.3s;
+  }
+  @media (max-width: 992px) {
+    .row-view .col-md-6.col-lg-4 {
+      flex: 0 0 50%;
+    }
+  }
+  @media (max-width: 768px) {
+    .row-view .col-md-6.col-lg-4 {
+      flex: 0 0 100%;
+    }
+  }
+  .row-view .col-md-6.col-lg-4 .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .all-row-view .col-md-6.col-lg-4 .title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .column-view .col-md-6.col-lg-4 {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+    transition: .3s;
+  }
+  .all-row-view .feat .all-infos {
+    width: 65%;
+    border: 0 !important;
+  }
+  .feat .all-infos {
+    border: 0 !important;
+  }
+  .feat .all-infos .info {
+    font-size: 14px;
+  }
+  .row-view .info {
+    display: none !important;
+  }
+  .row-view .all-infos {
+    height: 85px;
+  }
+  @media (max-width: 768px) {
+    .all-row-view .all-infos {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .all-row-view .all-infos .title {
+      text-align: left;
+      padding-bottom: 0 !important;
+    }
+    .all-row-view .all-infos .info {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: .5rem;
+      padding-top: 0 !important;
+    }
+    .all-row-view .col-md-6.col-lg-4 .feat img {
+      padding-bottom 0 !important;
+    }
+
+  }
+</style>
 <div class="arrow">
   <i class="fa-solid fa-angle-up"></i>
 </div>
@@ -7,28 +125,32 @@
 <!-- Start Company -->
 <div style="min-height: 100dvh" class="company text-center mt-5">
   <div class="container">
-    <!-- Search -->
-    <div class="input-group justify-content-center mb-5">
-      <div class="form-outline">
-        <input type="search" id="form1" class="form-control" />
+    <div class="filter d-flex align-items-center gap-3">
+      <p  class="fw-bold">Filter: </p>
+                   <!-- View Toggle Buttons -->
+                   <div class="view-toggle text-center d-flex align-items-center gap-2">
+                    <button id="columnView" class="btn border rounded"><i class="fa-solid fa-table-cells"></i></button>
+                    <button id="allRowView" class="btn border rounded"><i class="fa-solid fa-list"></i></button>
+                    <button id="rowView" class="btn border rounded"><i class="fa-solid fa-table-cells-large"></i></button>
+                  </div>
+            <!-- Select dropdown for filtering -->
+            <select style="width: fit-content" id="filterSelect" class="form-select">
+              <option selected id="all-select">All</option>
+              {% for industry in all_industry %}
+              <option>{{ industry }}</option>
+              {% endfor %}
+            </select>
+      <!-- Search -->
+      <div class="input-group justify-content-center">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" />
+        </div>
+        <button type="button" id="searchButton" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
-      <button type="button" id="searchButton" class="btn btn-primary">
-        <i class="fas fa-search"></i>
-      </button>
     </div>
-
-    <!-- Select dropdown for filtering -->
-    <select
-      style="width: fit-content"
-      id="filterSelect"
-      class="form-select mb-5"
-    >
-      <option selected id="all-select">All</option>
-      {% for industry in all_industry %}
-      <option>{{ industry }}</option>
-      {% endfor %}
-    </select>
-    <div class="row filter-list"></div>
+    <div id="companyList" class="row column-view filter-list mt-5"></div>
   </div>
 </div>
 <!-- End Company -->
@@ -36,6 +158,11 @@
   // Get the select element and filter list
   const filterSelect = document.getElementById("filterSelect");
   const filterList = document.querySelector(".filter-list");
+  const companyList = document.getElementById("companyList");
+  const columnViewBtn = document.getElementById("columnView");
+  const rowViewBtn = document.getElementById("rowView");
+  const allRowView = document.getElementById("allRowView");
+
   // Function to filter and update the company list
   function filterCompanies(selectedCategory) {
     fetch(`/api/method/jirlie_template.api.industry?domain=${selectedCategory}`)
@@ -63,9 +190,13 @@
           imgCompany.src = `${el.company_logo}`;
           linkCompany.appendChild(imgCompany);
 
+          const allInfos = document.createElement("div");
+          allInfos.className = "all-infos ps-2 pe-2 pb-3 border-top pt-3";
+          feat.appendChild(allInfos);
+
           const title = document.createElement("div");
           title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
-          feat.appendChild(title);
+          allInfos.appendChild(title);
 
           const headCompany = document.createElement("h4");
           headCompany.className = "fs-6 mb-2 fw-bold";
@@ -75,6 +206,41 @@
           linkCompanyTwo.href = `/company/profile/${el.name}`;
           linkCompanyTwo.appendChild(headCompany);
           title.appendChild(linkCompanyTwo);
+
+          const info = document.createElement("div");
+          info.className = "info ps-2 pe-2 pb-3 pt-3 d-flex align-items-center justify-content-between";
+          allInfos.appendChild(info);
+
+          const location = document.createElement("p");
+          location.className = `d-flex align-items-center gap-2 h-auto`;
+          location.appendChild(document.createTextNode(el.country));
+          info.appendChild(location);
+
+          const iconLocation = document.createElement("i");
+          iconLocation.style.order = `-1`;
+          iconLocation.className = `fa-solid fa-location-dot fs-5`;
+          location.appendChild(iconLocation);
+
+          const domain = document.createElement("p");
+          domain.className = `d-flex align-items-center gap-2 h-auto`;
+          domain.appendChild(document.createTextNode(el.domain));
+          info.appendChild(domain);
+
+          const iconDomain = document.createElement("i");
+          iconDomain.style.order = `-1`;
+          iconDomain.className = `fa-solid fa-building fs-5`;
+          domain.appendChild(iconDomain);
+
+
+          const jirlieId = document.createElement("p");
+          jirlieId.className = `d-flex align-items-center gap-2 h-auto`;
+          jirlieId.appendChild(document.createTextNode(`Jirlie ID: ${el.jirlie_id}`));
+          info.appendChild(jirlieId);
+
+          const iconJirlieId = document.createElement("i");
+          iconJirlieId.style.order = `-1`;
+          iconJirlieId.className = `fa-regular fa-building fs-5`;
+          jirlieId.appendChild(iconJirlieId);
         });
       });
   }
@@ -86,7 +252,6 @@
       fetch(`https://jirlie.com/api/method/jirlie_template.api.industry`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           filterList.innerHTML = ""; // Clear the current list
 
           data.message.data.forEach((el) => {
@@ -108,18 +273,57 @@
             imgCompany.src = `${el.company_logo}`;
             linkCompany.appendChild(imgCompany);
 
-            const title = document.createElement("div");
-            title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
-            feat.appendChild(title);
+            const allInfos = document.createElement("div");
+          allInfos.className = "all-infos ps-2 pe-2 pb-3 border-top pt-3";
+          feat.appendChild(allInfos);
 
-            const headCompany = document.createElement("h4");
-            headCompany.className = "fs-6 mb-2 fw-bold";
-            headCompany.appendChild(document.createTextNode(el.company_name));
+          const title = document.createElement("div");
+          title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
+          allInfos.appendChild(title);
 
-            const linkCompanyTwo = document.createElement("a");
-            linkCompanyTwo.href = `/company/profile/${el.name}`;
-            linkCompanyTwo.appendChild(headCompany);
-            title.appendChild(linkCompanyTwo);
+          const headCompany = document.createElement("h4");
+          headCompany.className = "fs-6 mb-2 fw-bold";
+          headCompany.appendChild(document.createTextNode(el.company_name));
+
+          const linkCompanyTwo = document.createElement("a");
+          linkCompanyTwo.href = `/company/profile/${el.name}`;
+          linkCompanyTwo.appendChild(headCompany);
+          title.appendChild(linkCompanyTwo);
+
+          const info = document.createElement("div");
+          info.className = "info ps-2 pe-2 pb-3 pt-3 d-flex align-items-center justify-content-between";
+          allInfos.appendChild(info);
+
+          const location = document.createElement("p");
+          location.className = `d-flex align-items-center gap-2 h-auto`;
+          location.appendChild(document.createTextNode(el.country));
+          info.appendChild(location);
+
+          const iconLocation = document.createElement("i");
+          iconLocation.style.order = `-1`;
+          iconLocation.className = `fa-solid fa-location-dot fs-5`;
+          location.appendChild(iconLocation);
+
+          const domain = document.createElement("p");
+          domain.className = `d-flex align-items-center gap-2 h-auto`;
+          domain.appendChild(document.createTextNode(el.domain));
+          info.appendChild(domain);
+
+          const iconDomain = document.createElement("i");
+          iconDomain.style.order = `-1`;
+          iconDomain.className = `fa-solid fa-building fs-5`;
+          domain.appendChild(iconDomain);
+
+
+          const jirlieId = document.createElement("p");
+          jirlieId.className = `d-flex align-items-center gap-2 h-auto`;
+          jirlieId.appendChild(document.createTextNode(`Jirlie ID: ${el.jirlie_id}`));
+          info.appendChild(jirlieId);
+
+          const iconJirlieId = document.createElement("i");
+          iconJirlieId.style.order = `-1`;
+          iconJirlieId.className = `fa-regular fa-building fs-5`;
+          jirlieId.appendChild(iconJirlieId);
           });
         });
     } else if (selectedCategory) {
@@ -131,11 +335,9 @@
 
   // Initial fetch on page load
   window.addEventListener("load", () => {
-    // filterCompanies(""); // Load all companies initially
     fetch(`https://jirlie.com/api/method/jirlie_template.api.industry`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         filterList.innerHTML = ""; // Clear the current list
 
         data.message.data.forEach((el) => {
@@ -157,9 +359,13 @@
           imgCompany.src = `${el.company_logo}`;
           linkCompany.appendChild(imgCompany);
 
+          const allInfos = document.createElement("div");
+          allInfos.className = "all-infos ps-2 pe-2 pb-3 border-top pt-3";
+          feat.appendChild(allInfos);
+
           const title = document.createElement("div");
           title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
-          feat.appendChild(title);
+          allInfos.appendChild(title);
 
           const headCompany = document.createElement("h4");
           headCompany.className = "fs-6 mb-2 fw-bold";
@@ -169,12 +375,100 @@
           linkCompanyTwo.href = `/company/profile/${el.name}`;
           linkCompanyTwo.appendChild(headCompany);
           title.appendChild(linkCompanyTwo);
+
+          const info = document.createElement("div");
+          info.className = "info ps-2 pe-2 pb-3 pt-3 d-flex align-items-center justify-content-between";
+          allInfos.appendChild(info);
+
+          const location = document.createElement("p");
+          location.className = `d-flex align-items-center gap-2 h-auto`;
+          location.appendChild(document.createTextNode(el.country));
+          info.appendChild(location);
+
+          const iconLocation = document.createElement("i");
+          iconLocation.style.order = `-1`;
+          iconLocation.className = `fa-solid fa-location-dot fs-5`;
+          location.appendChild(iconLocation);
+
+          const domain = document.createElement("p");
+          domain.className = `d-flex align-items-center gap-2 h-auto`;
+          domain.appendChild(document.createTextNode(el.domain));
+          info.appendChild(domain);
+
+          const iconDomain = document.createElement("i");
+          iconDomain.style.order = `-1`;
+          iconDomain.className = `fa-solid fa-building fs-5`;
+          domain.appendChild(iconDomain);
+
+
+          const jirlieId = document.createElement("p");
+          jirlieId.className = `d-flex align-items-center gap-2 h-auto`;
+          jirlieId.appendChild(document.createTextNode(`Jirlie ID: ${el.jirlie_id}`));
+          info.appendChild(jirlieId);
+
+          const iconJirlieId = document.createElement("i");
+          iconJirlieId.style.order = `-1`;
+          iconJirlieId.className = `fa-regular fa-building fs-5`;
+          jirlieId.appendChild(iconJirlieId);
         });
       });
   });
-</script>
- ذ  
-<script>
+
+// Function to remove 'active' class from all buttons
+function removeActiveClass() {
+    allRowView.classList.remove('active');
+    columnViewBtn.classList.remove('active');
+    rowViewBtn.classList.remove('active');
+}
+
+// Toggle view between columns and rows
+allRowView.addEventListener("click", (el) => {
+    removeActiveClass();
+    allRowView.classList.add('active');
+    companyList.classList.add("all-row-view");
+    companyList.classList.remove("row-view");
+    companyList.classList.remove("column-view");
+});
+
+columnViewBtn.addEventListener("click", () => {
+    removeActiveClass();
+    columnViewBtn.classList.add('active');
+    companyList.classList.add("column-view");
+    companyList.classList.remove("row-view");
+    companyList.classList.remove("all-row-view");
+});
+
+rowViewBtn.addEventListener("click", () => {
+    removeActiveClass();
+    rowViewBtn.classList.add('active');
+    companyList.classList.add("row-view");
+    companyList.classList.remove("column-view");
+    companyList.classList.remove("all-row-view");
+});
+
+// Apply view based on screen width
+if (window.innerWidth <= 768 || window.innerWidth >= 992) {
+    removeActiveClass();
+    allRowView.classList.add('active');
+    companyList.classList.add('all-row-view');
+    companyList.classList.remove('column-view');
+    companyList.classList.remove('row-view');
+} else if (window.innerWidth <= 992) {
+    removeActiveClass();
+    rowViewBtn.classList.add('active');
+    companyList.classList.add('row-view');
+    companyList.classList.remove('column-view');
+    companyList.classList.remove('all-row-view');
+} else {
+    removeActiveClass();
+    columnViewBtn.classList.add('active'); // Assume default view for larger screens is 'column-view'
+    companyList.classList.remove('all-row-view');
+    companyList.classList.remove('row-view');
+    companyList.classList.add('column-view');
+}
+
+
+
   // Add an event listener to the search button
   const searchButton = document.getElementById("searchButton");
   searchButton.addEventListener("click", handleSearch);
@@ -218,18 +512,58 @@
             imgCompany.src = `${el.company_logo}`;
             linkCompany.appendChild(imgCompany);
 
-            const title = document.createElement("div");
-            title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
-            feat.appendChild(title);
+            const allInfos = document.createElement("div");
+          allInfos.className = "all-infos ps-2 pe-2 pb-3 border-top pt-3";
+          feat.appendChild(allInfos);
 
-            const headCompany = document.createElement("h4");
-            headCompany.className = "fs-6 mb-2 fw-bold";
-            headCompany.appendChild(document.createTextNode(el.company_name));
+          const title = document.createElement("div");
+          title.className = "title ps-2 pe-2 pb-3 border-top pt-3";
+          allInfos.appendChild(title);
 
-            const linkCompanyTwo = document.createElement("a");
-            linkCompanyTwo.href = `/company/profile/${el.name}`;
-            linkCompanyTwo.appendChild(headCompany);
-            title.appendChild(linkCompanyTwo);
+          const headCompany = document.createElement("h4");
+          headCompany.className = "fs-6 mb-2 fw-bold";
+          headCompany.appendChild(document.createTextNode(el.company_name));
+
+          const linkCompanyTwo = document.createElement("a");
+          linkCompanyTwo.href = `/company/profile/${el.name}`;
+          linkCompanyTwo.appendChild(headCompany);
+          title.appendChild(linkCompanyTwo);
+
+          const info = document.createElement("div");
+          info.className = "info ps-2 pe-2 pb-3 pt-3 d-flex align-items-center justify-content-between";
+          allInfos.appendChild(info);
+
+
+          const location = document.createElement("p");
+          location.className = `d-flex align-items-center gap-2 h-auto`;
+          location.appendChild(document.createTextNode(el.country));
+          info.appendChild(location);
+
+          const iconLocation = document.createElement("i");
+          iconLocation.style.order = `-1`;
+          iconLocation.className = `fa-solid fa-location-dot fs-5`;
+          location.appendChild(iconLocation);
+
+          const domain = document.createElement("p");
+          domain.className = `d-flex align-items-center gap-2 h-auto`;
+          domain.appendChild(document.createTextNode(el.domain));
+          info.appendChild(domain);
+
+          const iconDomain = document.createElement("i");
+          iconDomain.style.order = `-1`;
+          iconDomain.className = `fa-solid fa-building fs-5`;
+          domain.appendChild(iconDomain);
+
+
+          const jirlieId = document.createElement("p");
+          jirlieId.className = `d-flex align-items-center gap-2 h-auto`;
+          jirlieId.appendChild(document.createTextNode(`Jirlie ID: ${el.jirlie_id}`));
+          info.appendChild(jirlieId);
+
+          const iconJirlieId = document.createElement("i");
+          iconJirlieId.style.order = `-1`;
+          iconJirlieId.className = `fa-regular fa-building fs-5`;
+          jirlieId.appendChild(iconJirlieId);
           }
         });
       });

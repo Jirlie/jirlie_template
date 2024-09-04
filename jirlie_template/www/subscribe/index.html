@@ -138,11 +138,11 @@ Jirlie Cloud | Start your journey wherever your business takes you, stay connect
                   console.log('Done');
                 
                   frappe.call({
-                      "method": "login",
+                      url: "https://press.jc.jirlie.com/api/method/login",
+                      type: "POST",
                       args: {
                           usr: document.querySelector("input[id='email']").value,
                           pwd: document.querySelector("input[id='password']").value,
-                          lead_email: $("#lead-email").val(),
                       },
                       callback: function(r) {
                           $(me).prop("disabled", false);
@@ -150,8 +150,9 @@ Jirlie Cloud | Start your journey wherever your business takes you, stay connect
                               alert("Error, please contact support@jirlie.com");
                               $(me).html("Login Failed! Try Again.").prop("disabled", false);
                           } else {
+                              console.log(r.message);
                               console.log("Logged In");
-                              setInterval(() => {window.location.href = "/dashboard"},window.globalinterval)
+                              setInterval(() => {window.location.href = "https://press.jc.jirlie.com/dashboard"},window.globalinterval)
                               
                           }
                       }
@@ -170,7 +171,7 @@ Jirlie Cloud | Start your journey wherever your business takes you, stay connect
                   console.log('Done signup');
                 
                   frappe.call({
-                      "method": "press.api.account.signup",
+                      "url": "https://press.jc.jirlie.com/api/method/press.api.account.signup",
                       args: {
                           email: document.querySelector("input[id='signup-email']").value,
                           // full_name: document.querySelector("input[id='signup-name']").value
@@ -206,7 +207,7 @@ Jirlie Cloud | Start your journey wherever your business takes you, stay connect
                   console.log('Done signup');
                 
                   frappe.call({
-                      "method": "frappe.core.doctype.user.user.reset_password",
+                      "url": "https://press.jc.jirlie.com/api/method/frappe.core.doctype.user.user.reset_password",
                       args: {
                           user: document.querySelector("input[id='reset-email']").value
                       },

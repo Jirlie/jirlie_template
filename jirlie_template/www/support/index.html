@@ -88,7 +88,11 @@ supported, no matter the situation, Jirlie has got your back covered {% endblock
               </div>
               <div class="col-12">
                 <label for="inputSub" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="Subject" />
+                <select class="form-select" id="Subject">
+                  {% for issue in issue_type2 %}
+                    <option>{{issue.name}}</option>
+                  {% endfor %}
+                </select>
               </div>
               <div class="col-12">
                 <label for="textArea" class="form-label">Message</label>
